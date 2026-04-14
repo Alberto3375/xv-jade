@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Invitación XV | Abre el sobre</title>
+
+<!-- Fuentes simples pero elegantes -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(circle at 30% 20%, #2c0f18, #0a0306);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Cormorant Garamond', serif;
+    transition: opacity 1s ease-in-out;
+    overflow-x: hidden;
+  }
+
+  /* contenedor para centrar */
+  .center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  /* caja principal con perspectiva */
+  .envelope-box {
+    perspective: 1300px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* SOBRE - estilo refinado */
+  .envelope {
+    width: 360px;
+    height: 230px;
+    position: relative;
+    background: linear-gradient(145deg, #2e1722, #1b0b12);
+    border-radius: 18px;
+    box-shadow: 0 25px 40px -12px black, inset 0 1px 0 rgba(255,255,240,0.1);
+    transition: transform 0.2s ease;
+    z-index: 10;
+  }
+
+  /* tapa triangular superior */
+  .flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(125deg, #3f202e, #26131c);
+    clip-path: polygon(0 0, 100% 0, 50% 58%);
+    transform-origin: top;
+    transition: transform 0.9s cubic-bezier(0.68, -0.3, 0.32, 1.2);
+    border-radius: 18px 18px 0 0;
+    z-index: 4;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  /* pequeño detalle dorado en la tapa */
+  .flap::after {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: radial-gradient(circle, #e7bf6d, #b38f40);
+    border-radius: 2px;
+    opacity: 0.6;
+  }
+
+  /* sello de cera */
+  .seal {
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    background: radial-gradient(circle at 35% 35%, #d42e44, #941a2b);
+    border-radius: 50%;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    transition: all 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,235,170,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #ffeaaf;
+    font-family: 'Segoe UI', system-ui;
+  }
+
+  /* HOJA BLANCA (pergamino vacío) */
+  .blank-sheet {
+    position: absolute;
+    width: 280px;
+    height: 0px;
+    background: #fffef7;
+    background: linear-gradient(145deg, #ffffff, #fef9ef);
+    left: 50%;
+    transform: translateX(-50%);
+    top: 48%;
+    border-radius: 14px;
+    box-shadow: 0 18px 35px -6px rgba(0,0,0,0.5);
+    overflow: hidden;
+    transition: height 0.85s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+    z-index: 12;
+    border: 1px solid #ebdfb7;
+  }
+
+  /* contenido interior: absolutamente vacío, solo fondo blanco suave */
+  .sheet-inner {
+    opacity: 0;
+    transition: opacity 0.01s;
+    /* no agregamos texto, permanece en blanco */
+    width: 100%;
+    height: 100%;
+    background: #fffef7;
+    border-radius: 14px;
+  }
+
+  /* efecto de apertura: tapa rotada */
+  .open .flap {
+    transform: rotateX(180deg);
+  }
+
+  /* sello desaparece */
+  .open .seal {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+    pointer-events: none;
+  }
+
+  /* el pergamino se despliega completamente */
+  .open .blank-sheet {
+    height: 340px;   /* altura suficiente para simular una hoja */
+  }
+
+  /* no es necesario que muestre texto, pero la hoja ya es visible */
+  .open .sheet-inner {
+    opacity: 1;
+  }
+
+  /* fade out del body para transición a la otra página */
+  body.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.95s ease;
+  }
+
+  /* pequeño texto de instrucción */
+  .tap-hint {
+    margin-top: 28px;
+    font-family: 'Cormorant Garamond', serif;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    padding: 8px 20px;
+    border-radius: 50px;
+    color: #eeddbb;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border: 1px solid rgba(220, 180, 80, 0.4);
+    transition: all 0.2s;
+  }
+
+  .tap-hint i {
+    margin-right: 8px;
+    font-size: 14px;
+  }
+
+  /* al hacer hover en el sobre, una leve escala */
+  .envelope-box:hover .envelope {
+    transform: scale(1.01);
+  }
+
+  /* adaptación móvil */
+  @media (max-width: 480px) {
+    .envelope {
+      width: 300px;
+      height: 200px;
+    }
+    .blank-sheet {
+      width: 250px;
+    }
+    .open .blank-sheet {
+      height: 300px;
+    }
+    .tap-hint {
+      font-size: 14px;
+      margin-top: 24px;
+    }
+  }
+
+  /* detalle decorativo en sobre (líneas doradas) */
+  .envelope::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    width: calc(100% - 36px);
+    height: calc(100% - 36px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    pointer-events: none;
+  }
+
+  /* hoja en blanco: efecto sutil de papel antiguo */
+  .blank-sheet::after {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(200,170,110,0.08) 0%, rgba(255,255,245,0) 70%);
+    pointer-events: none;
+    border-radius: 50%;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="center-wrapper">
+  <div class="envelope-box" id="envelopeTrigger">
+    <!-- SOBRE PRINCIPAL -->
+    <div class="envelope">
+      <!-- tapa que se levanta -->
+      <div class="flap"></div>
+      
+      <!-- hoja/blanco que aparece al abrir -->
+      <div class="blank-sheet">
+        <div class="sheet-inner"></div>
+        <!-- No hay texto, está completamente vacío / blanco -->
+      </div>
+      
+      <!-- sello decorativo -->
+      <div class="seal">
+        ✦
+      </div>
+    </div>
+    
+    <!-- Mensaje sutil para que el usuario sepa que debe tocar -->
+    <div class="tap-hint">
+      <i>✧</i> Toca el sobre para abrirlo <i>✧</i>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const trigger = document.getElementById("envelopeTrigger");
+    let isOpened = false;
+    
+    // Al hacer click se ejecuta la animación y luego la redirección directa
+    trigger.addEventListener("click", (event) => {
+      if (isOpened) return;
+      isOpened = true;
+      
+      // 1. Agregar clase 'open' para activar las transformaciones (tapa gira, sello desaparece, hoja se despliega)
+      trigger.classList.add("open");
+      
+      // 2. Esperamos a que la hoja se vea completamente desplegada (tiempo suficiente para disfrutar la animación)
+      // Luego aplicamos el fade-out al body y redirigimos a XV.html
+      setTimeout(() => {
+        document.body.classList.add("fade-out");
+      }, 900);   // a los 0.9s empieza a desvanecerse, justo cuando la hoja ya está desplegada
+      
+      // 3. Redirección a la página "XV.html" después de que termine el fade
+      setTimeout(() => {
+        window.location.href = "XV.html";
+      }, 1700);   // tiempo suficiente para que se vea la hoja en blanco y haga transición
+    });
+    
+    // Prevenir doble apertura por si se hace click repetido (opcional)
+    // y añadir un pequeño feedback háptico visual (no necesario)
+  })();
+</script>
+</body>
+</html>

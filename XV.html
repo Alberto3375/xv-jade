@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<title>XV Jade Yamilet · Victorian Majesty · Sangre & Oro</title>
+<!-- Google Fonts: Victoriano y Elegante -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400;14..32,500;14..32,600&family=Cinzel:wght@400;500;600;700;800;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<!-- Font Awesome 6 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- Firebase SDKs (configuracion demostrativa con fallback local) -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, query, orderBy, getDocs, limit } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyB7Yc9S9x8Lx9x9x9x9x9x9x9x9x9x9x9x",
+    authDomain: "xv-jade-victorian.firebaseapp.com",
+    projectId: "xv-jade-victorian",
+    storageBucket: "xv-jade-victorian.firebasestorage.app",
+    messagingSenderId: "123456789012",
+    appId: "1:123456789012:web:abcdef1234567890"
+  };
+  
+  let db;
+  try {
+    const firebaseApp = initializeApp(firebaseConfig);
+    db = getFirestore(firebaseApp);
+    console.log("Firebase conectado");
+  } catch(e) {
+    console.warn("Firebase no disponible, usando almacenamiento local");
+    db = null;
+  }
+  
+  window.db = db;
+  window.addDoc = addDoc;
+  window.collection = collection;
+</script>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0104;
+    color: #f0ebe3;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Fondo victoriano dramático: rojo sangre, negro y textura de pergamino SIN IMAGENES */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 20%, rgba(100, 15, 25, 0.4), rgba(5, 1, 3, 0.98)),
+                repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.03) 0px, rgba(212, 175, 55, 0.03) 3px, transparent 3px, transparent 15px);
+    pointer-events: none;
+    z-index: -2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(0.5px);
+    z-index: -1;
+}
+
+/* Scroll con estilo victoriano */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #1a050b;
+}
+::-webkit-scrollbar-thumb {
+    background: #c02b3c;
+    border-radius: 20px;
+    box-shadow: inset 0 0 2px #d4af37;
+}
+
+/* Ornamentos victorianos en esquinas - PURAMENTE CSS SIN IMAGENES */
+.filigrana-esquina {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.7;
+}
+.esquina-tl {
+    top: 15px;
+    left: 15px;
+    border-top: 2px solid #c02b3c;
+    border-left: 2px solid #c02b3c;
+    width: 70px;
+    height: 70px;
+}
+.esquina-tl::before {
+    content: "✦";
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    color: #d4af37;
+    font-size: 20px;
+}
+.esquina-tr {
+    top: 15px;
+    right: 15px;
+    border-top: 2px solid #c02b3c;
+    border-right: 2px solid #c02b3c;
+    width: 70px;
+    height: 70px;
+}
+.esquina-tr::before {
+    content: "✦";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    color: #d4af37;
+    font-size: 20px;
+}
+.esquina-bl {
+    bottom: 15px;
+    left: 15px;
+    border-bottom: 2px solid #c02b3c;
+    border-left: 2px solid #c02b3c;
+    width: 70px;
+    height: 70px;
+}
+.esquina-bl::before {
+    content: "✦";
+    position: absolute;
+    bottom: -8px;
+    left: -8px;
+    color: #d4af37;
+    font-size: 20px;
+}
+.esquina-br {
+    bottom: 15px;
+    right: 15px;
+    border-bottom: 2px solid #c02b3c;
+    border-right: 2px solid #c02b3c;
+    width: 70px;
+    height: 70px;
+}
+.esquina-br::before {
+    content: "✦";
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    color: #d4af37;
+    font-size: 20px;
+}
+
+/* Divisor victoriano elegante */
+.victorian-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 2rem 0;
+}
+.victorian-divider .line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c02b3c, #d4af37, #c02b3c, transparent);
+    width: 120px;
+}
+.victorian-divider i {
+    color: #c92b3e;
+    font-size: 1.4rem;
+    filter: drop-shadow(0 0 4px rgba(192, 43, 60, 0.8));
+}
+
+/* Hero con fondo animado gradiente sin imagenes */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+    isolation: isolate;
+}
+.animated-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+.animated-bg .glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(192, 43, 60, 0.25), transparent 70%);
+    border-radius: 50%;
+    animation: floatGlow 16s infinite alternate;
+}
+.glow1 { top: 10%; left: -5%; width: 350px; height: 350px; background: radial-gradient(circle, rgba(212, 175, 55, 0.2), transparent); }
+.glow2 { bottom: 0%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(192, 43, 60, 0.2), transparent); animation-duration: 20s; }
+.glow3 { top: 40%; left: 20%; width: 250px; height: 250px; background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent); animation-duration: 12s; }
+@keyframes floatGlow {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    100% { transform: translate(40px, 40px) scale(1.3); opacity: 0.8; }
+}
+
+.hero-text-overlay {
+    position: relative;
+    z-index: 30;
+    text-align: center;
+    max-width: 850px;
+    width: 90%;
+    background: transparent;
+    animation: floatUp 1s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+@keyframes floatUp {
+    0% { opacity: 0; transform: translateY(50px) scale(0.96); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.pre-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 6px;
+    color: #e6c27a;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 60px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(192, 43, 60, 0.7);
+}
+.xv-number {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(5rem, 18vw, 11rem);
+    font-weight: 900;
+    background: linear-gradient(145deg, #f3e0b0, #d4af37, #b57c2c, #9e2d2d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 12px;
+}
+.name-modern {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.8rem, 10vw, 5.8rem);
+    color: #fff6ea;
+    text-shadow: 0 4px 20px #6b0f1a, 0 0 8px #d4af37;
+    margin: 0.6rem 0;
+}
+.date-modern {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    letter-spacing: 2.5px;
+    border-top: 1px solid rgba(212, 175, 55, 0.9);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.9);
+    display: inline-block;
+    padding: 12px 32px;
+    margin-top: 1rem;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(5px);
+    border-radius: 60px;
+}
+
+/* Secciones generales */
+.section-modern {
+    padding: 5rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+}
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f3e2bc, #d4af37, #b02b3a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.5rem;
+}
+.subhead {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: #d4bc8a;
+    margin-bottom: 2.5rem;
+    letter-spacing: 1.5px;
+}
+
+/* Grid de información */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+.info-card {
+    background: rgba(12, 3, 8, 0.8);
+    backdrop-filter: blur(14px);
+    border-radius: 2rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(192, 43, 60, 0.6);
+    transition: transform 0.25s ease, border-color 0.2s;
+}
+.info-card:hover {
+    transform: translateY(-6px);
+    border-color: #d4af37;
+    background: rgba(40, 10, 18, 0.9);
+}
+.info-card i {
+    font-size: 2.5rem;
+    color: #c02b3c;
+    margin-bottom: 1rem;
+}
+.info-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: #e9d2a4;
+}
+
+/* Countdown victoriano */
+.countdown-modern {
+    background: rgba(10, 2, 5, 0.7);
+    backdrop-filter: blur(18px);
+    border-radius: 70px;
+    padding: 1.8rem 1rem;
+    margin: 2rem 0;
+    border: 1px solid rgba(192, 43, 60, 0.7);
+}
+.countdown-flex {
+    display: flex;
+    justify-content: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+}
+.time-block {
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 2rem;
+    padding: 0.8rem 1.4rem;
+    min-width: 85px;
+    text-align: center;
+    border-bottom: 3px solid #b42b3c;
+}
+.time-number {
+    font-family: 'Cinzel', monospace;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 800;
+    color: #e6c27a;
+}
+.time-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #d4af37;
+}
+
+/* Galería abstracta elegante SIN IMAGENES */
+.gallery-grande {
+    background: rgba(5, 1, 3, 0.6);
+    border-radius: 48px;
+    padding: 2rem 1rem;
+    margin: 2rem 0;
+    border: 1px solid rgba(192, 43, 60, 0.5);
+}
+.victorian-carousel {
+    position: relative;
+    width: 100%;
+    height: 580px;
+    overflow: hidden;
+    border-radius: 40px;
+    box-shadow: 0 25px 45px -12px black;
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    background: linear-gradient(145deg, #1a0a12, #0d0408);
+}
+.gallery-slides-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 30% 20%, rgba(180, 50, 70, 0.3), rgba(8, 2, 5, 0.95));
+}
+.gallery-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+.gallery-icon {
+    font-size: 5rem;
+    color: #d4af37;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 15px #c02b3c;
+}
+.gallery-caption {
+    text-align: center;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.7), transparent);
+    backdrop-filter: blur(12px);
+    padding: 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    color: #d4af37;
+    letter-spacing: 3px;
+    z-index: 5;
+    font-weight: 500;
+}
+.gallery-sub {
+    font-size: 1rem;
+    color: #e6c88a;
+    margin-top: 0.5rem;
+    font-family: 'Inter', sans-serif;
+}
+.gallery-nav {
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    z-index: 10;
+}
+.gallery-dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid #d4af37;
+}
+.gallery-dot.active-dot {
+    background: #d4af37;
+    transform: scale(1.3);
+    box-shadow: 0 0 10px #c02b3c;
+}
+
+/* Mapa elegante (iframe real) */
+.map-container {
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 1px solid rgba(192, 43, 60, 0.7);
+    margin: 2rem 0;
+    box-shadow: 0 15px 25px -12px black;
+}
+.map-container iframe {
+    width: 100%;
+    height: 400px;
+    display: block;
+}
+
+/* Formulario victoriano */
+.form-modern {
+    background: rgba(10, 3, 7, 0.85);
+    backdrop-filter: blur(24px);
+    border-radius: 56px;
+    padding: 2.8rem 2rem;
+    max-width: 650px;
+    margin: 2rem auto;
+    border: 1px solid rgba(192, 43, 60, 0.7);
+}
+.input-group {
+    margin-bottom: 1.8rem;
+}
+.input-group label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 1.2px;
+    color: #e3c483;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.input-group input {
+    width: 100%;
+    padding: 1.2rem 1.8rem;
+    background: rgba(25, 8, 12, 0.9);
+    border: 1px solid #a5573a;
+    border-radius: 60px;
+    font-size: 1rem;
+    color: #f5ecdb;
+    font-family: 'Inter', sans-serif;
+}
+.input-group input:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.3);
+}
+.btn-blood {
+    background: linear-gradient(95deg, #bc2f3e, #7e1c28);
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    border-radius: 60px;
+    font-weight: 600;
+    color: #faeec7;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+.btn-blood:hover {
+    background: linear-gradient(95deg, #d43f4e, #a12230);
+    box-shadow: 0 5px 15px rgba(188, 47, 62, 0.5);
+}
+.btn-regalo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #0f0308;
+    border: 1.5px solid #bc2f3e;
+    padding: 0.9rem 2.2rem;
+    border-radius: 60px;
+    color: #e2bc7c;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    transition: 0.2s;
+}
+.btn-regalo:hover {
+    border-color: #d4af37;
+    background: #1c0810;
+}
+.btn-sheen {
+    background: linear-gradient(135deg, #0a0a14, #1f1825);
+    border: 1.5px solid #d4af37;
+    margin-top: 1rem;
+}
+.btn-sheen i {
+    color: #e6c27a;
+}
+.confirmados-badge {
+    background: rgba(188, 47, 62, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 40px;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+    font-family: 'Inter', sans-serif;
+}
+.music-player {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(10, 3, 6, 0.9);
+    backdrop-filter: blur(16px);
+    padding: 0.6rem 1.3rem;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #bc2f3e;
+    z-index: 1100;
+}
+.music-player button {
+    background: #bc2f3e;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #0a0104;
+}
+footer {
+    text-align: center;
+    padding: 2.5rem;
+    background: rgba(0,0,0,0.8);
+    border-top: 1px solid #bc2f3e;
+}
+@media (max-width: 768px) {
+    .victorian-carousel { height: 420px; }
+    .gallery-caption { font-size: 1rem; padding: 10px; }
+    .section-modern { padding: 3rem 1rem; }
+    .filigrana-esquina { width: 50px; height: 50px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Ornamentos victorianos -->
+<div class="filigrana-esquina esquina-tl"></div>
+<div class="filigrana-esquina esquina-tr"></div>
+<div class="filigrana-esquina esquina-bl"></div>
+<div class="filigrana-esquina esquina-br"></div>
+
+<!-- HERO PRINCIPAL -->
+<section class="hero">
+    <div class="animated-bg">
+        <div class="glow glow1"></div>
+        <div class="glow glow2"></div>
+        <div class="glow glow3"></div>
+    </div>
+    <div class="hero-text-overlay">
+        <div class="pre-badge">⚜️ VICTORIAN MAJESTY ⚜️</div>
+        <div class="xv-number">XV</div>
+        <div class="name-modern">Jade Yamilet</div>
+        <div class="date-modern">VEINTICUATRO DE MAYO · MMXXVI · 5:00 P.M.</div>
+        <div class="victorian-divider" style="margin-top: 1.2rem;"><span class="line"></span><i class="fas fa-crown"></i><span class="line"></span></div>
+    </div>
+</section>
+
+<!-- INFORMACIÓN DEL LEGADO -->
+<section class="section-modern">
+    <div class="victorian-divider"><i class="fas fa-gem"></i><span class="line"></span><i class="fas fa-feather-alt"></i><span class="line"></span><i class="fas fa-gem"></i></div>
+    <h2 class="section-title">El Legado Victoriano</h2>
+    <div class="subhead">Amor, tradición y un nuevo comienzo</div>
+    <div class="info-grid">
+        <div class="info-card"><i class="fas fa-venus-mars"></i><h3>Padres</h3><p><strong>Lucia Méndez Ruvalcaba</strong><br><strong>Ruben Acosta López</strong></p></div>
+        <div class="info-card"><i class="fas fa-hand-holding-heart"></i><h3>Padrinos</h3><p><strong>Gema Figueroa Valencia</strong><br><strong>Ricardo Acosta López</strong></p></div>
+        <div class="info-card"><i class="fas fa-church"></i><h3>Misa</h3><p><strong>Catedral de Guadalajara</strong><br>5:00 p.m.</p></div>
+        <div class="info-card"><i class="fas fa-glass-cheers"></i><h3>Salón</h3><p><strong>Event's salón Jardín</strong><br>Fiesta 7:00 p.m.</p></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.8rem; margin: 1rem 0 2rem;">
+        <div class="info-card" style="flex:1; min-width: 220px;"><i class="fas fa-tshirt"></i><h3>Código</h3><p><strong>Formal casual</strong><br><span style="color:#e6b87a;">Prohibido: dorado, beige, rojo brillante</span></p></div>
+        <div class="info-card" style="flex:1; min-width: 220px;"><i class="fas fa-envelope-open-text"></i><h3>Lluvia de Sobres</h3><p>🌸 Tradición y bendición<br>✨ Acompaña con tu sobre ✨</p></div>
+    </div>
+    <div class="victorian-divider"><i class="fas fa-hourglass-half"></i><span class="line"></span><i class="fas fa-star-of-life"></i><span class="line"></span><i class="fas fa-hourglass-half"></i></div>
+    <div class="countdown-modern"><div class="countdown-flex"><div class="time-block"><div class="time-number" id="dias">00</div><div class="time-label">Días</div></div><div class="time-block"><div class="time-number" id="horas">00</div><div class="time-label">Horas</div></div><div class="time-block"><div class="time-number" id="minutos">00</div><div class="time-label">Min</div></div><div class="time-block"><div class="time-number" id="segundos">00</div><div class="time-label">Seg</div></div></div></div>
+</section>
+
+<!-- MAPA (REAL, CON iframe) -->
+<section class="section-modern">
+    <div class="victorian-divider"><i class="fas fa-map-marker-alt"></i><span class="line"></span><i class="fas fa-location-dot"></i><span class="line"></span><i class="fas fa-map-marker-alt"></i></div>
+    <h2 class="section-title">Salón de Gala</h2>
+    <div class="subhead">Event's Salón Jardín · Guadalajara</div>
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.877542087836!2d-103.2696644!3d20.6338477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b3e7f75c2e97%3A0x6feb2b0530e57a89!2zRXZlbnQgU2Fsw7NuIEphcmRDrW4!5e0!3m2!1ses!2smx!4v1775666013018!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
+
+<!-- GALERÍA VICTORIANA SIN IMAGENES (abstracta con íconos) -->
+<section class="section-modern">
+    <div class="victorian-divider"><i class="fas fa-camera-retro"></i><span class="line"></span><i class="fas fa-images"></i><span class="line"></span><i class="fas fa-camera-retro"></i></div>
+    <h2 class="section-title">Galería Eterna</h2>
+    <div class="subhead">Momentos que definen la historia</div>
+    <div class="gallery-grande">
+        <div class="victorian-carousel">
+            <div class="gallery-slides-container" id="gallerySlidesContainer"></div>
+            <div class="gallery-nav" id="galleryDots"></div>
+        </div>
+    </div>
+</section>
+
+<!-- CONFIRMACIÓN -->
+<section class="section-modern">
+    <div class="victorian-divider"><i class="fas fa-scroll"></i><span class="line"></span><i class="fas fa-feather-alt"></i><span class="line"></span><i class="fas fa-scroll"></i></div>
+    <h2 class="section-title">Confirmad Presencia</h2>
+    <div class="subhead">Vuestra noble asistencia será sellada en la corte</div>
+    <div class="form-modern">
+        <form id="rsvpForm">
+            <div class="input-group"><label><i class="fas fa-users"></i> Familia / Casa</label><input type="text" id="familia" placeholder="Ej: Familia Méndez" required></div>
+            <div class="input-group"><label><i class="fas fa-user"></i> Nombre completo</label><input type="text" id="nombre" placeholder="Tu nombre" required></div>
+            <button type="submit" class="btn-blood"><i class="fas fa-check-double"></i> Confirmar Asistencia</button>
+            <div id="msgConfirm" style="text-align:center; margin-top:1rem; font-size:0.85rem;"></div>
+        </form>
+        <div style="margin-top: 2rem; text-align:center;"><h4 style="color:#d4af37; font-family: 'Cinzel', serif;"><i class="fas fa-crown"></i> Almas confirmadas</h4><div id="confirmadosList" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.7rem; margin-top:1rem;"></div></div>
+    </div>
+</section>
+
+<!-- REGALOS: LIVERPOOL + SHEIN LISTA DE DESEOS -->
+<section class="section-modern" style="text-align:center;">
+    <div class="victorian-divider"><i class="fas fa-gift"></i><span class="line"></span><i class="fas fa-diamond"></i><span class="line"></span><i class="fas fa-gift"></i></div>
+    <h2 class="section-title">Tesoros & Deseos</h2>
+    <div class="subhead">Un detalle para honrar este legado</div>
+    <div class="victorian-divider" style="margin: 2rem auto 1rem auto; width: 70%;"><span class="line"></span><i class="fas fa-star-of-life"></i><span class="line"></span></div>
+    <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color:#e6c27a;">Wishlist Shein</h3>
+    <a href="https://api-shein.shein.com/h5/sharejump/appjump?link=l08IUia8KTT_9_1&localcountry=MX&shc=2_l08IUia8KTT_9_1" target="_blank" rel="noopener noreferrer" class="btn-regalo btn-sheen" style="margin-top: 0.8rem;"><i class="fab fa-shein"></i> Ver mi lista de deseos SHEIN</a>
+    <p style="margin-top: 1rem; font-size: 0.85rem;"><i class="fas fa-crown"></i> El estilo victoriano también inspira moda · Regalos soñados en SHEIN</p>
+</section>
+
+<footer>
+    <div class="victorian-divider"><i class="fas fa-crown"></i><span class="line"></span><i class="fas fa-heart"></i><span class="line"></span><i class="fas fa-crown"></i></div>
+    <p style="font-family: 'Great Vibes', cursive; font-size: 1.8rem;">"La elegancia nunca pasa de moda"</p>
+    <p>24 de Mayo 2026 · Catedral de Guadalajara 5:00 p.m. · Event's salón Jardín 7:00 p.m.</p>
+    <p>Formal casual · Prohibido dorado, beige y rojo brillante · Lluvia de sobres</p>
+</footer>
+
+<div class="music-player"><button id="musicToggle"><i class="fas fa-pause"></i></button><span>Vals Victoriano</span><audio id="bgAudio" loop autoplay><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio></div>
+
+<script type="module">
+    // Galería abstracta sin imágenes (íconos y texto)
+    const galleryItems = [
+        { icon: "fas fa-crown", title: "Majestad Escarlata", desc: "El poder de una nueva era" },
+        { icon: "fas fa-gem", title: "Brillo de Sangre", desc: "Pasión y nobleza" },
+        { icon: "fas fa-feather-alt", title: "Legado Dorado", desc: "Tradición que perdura" },
+        { icon: "fas fa-heart", title: "Pasión Eterna", desc: "Amor sin tiempo" },
+        { icon: "fas fa-star-of-life", title: "Alma Carmesí", desc: "Fuego interior" },
+        { icon: "fas fa-dove", title: "Ritual de Oro", desc: "Bendición divina" },
+        { icon: "fas fa-infinity", title: "XV Eterno", desc: "Un nuevo comienzo" }
+    ];
+    const container = document.getElementById('gallerySlidesContainer');
+    const dotsContainer = document.getElementById('galleryDots');
+    let currentGallery = 0;
+    let galleryInterval;
+    
+    function buildGallery() {
+        container.innerHTML = '';
+        dotsContainer.innerHTML = '';
+        galleryItems.forEach((item, idx) => {
+            const slide = document.createElement('div');
+            slide.className = 'gallery-slide';
+            if(idx === 0) slide.classList.add('active');
+            slide.innerHTML = `
+                <div class="gallery-icon"><i class="${item.icon}"></i></div>
+                <div class="gallery-caption">${item.title} ✦</div>
+                <div class="gallery-sub">${item.desc}</div>
+            `;
+            container.appendChild(slide);
+            
+            const dot = document.createElement('div');
+            dot.className = 'gallery-dot';
+            if(idx === 0) dot.classList.add('active-dot');
+            dot.addEventListener('click', () => {
+                stopGalleryAuto();
+                goToSlide(idx);
+                startGalleryAuto();
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
+    
+    function goToSlide(index) {
+        const slides = document.querySelectorAll('.gallery-slide');
+        const dots = document.querySelectorAll('.gallery-dot');
+        if(!slides.length) return;
+        slides[currentGallery].classList.remove('active');
+        dots[currentGallery].classList.remove('active-dot');
+        currentGallery = (index + galleryItems.length) % galleryItems.length;
+        slides[currentGallery].classList.add('active');
+        dots[currentGallery].classList.add('active-dot');
+    }
+    
+    function nextSlide() { goToSlide(currentGallery + 1); }
+    function startGalleryAuto() { if(galleryInterval) clearInterval(galleryInterval); galleryInterval = setInterval(nextSlide, 5000); }
+    function stopGalleryAuto() { if(galleryInterval) clearInterval(galleryInterval); }
+    
+    buildGallery();
+    startGalleryAuto();
+    
+    const carouselDiv = document.querySelector('.victorian-carousel');
+    if(carouselDiv) {
+        carouselDiv.addEventListener('mouseenter', stopGalleryAuto);
+        carouselDiv.addEventListener('mouseleave', startGalleryAuto);
+    }
+    
+    // Countdown
+    function updateTimer() {
+        const target = new Date("May 24, 2026 19:00:00").getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+        if(diff > 0) {
+            document.getElementById("dias").innerText = Math.floor(diff / 86400000);
+            document.getElementById("horas").innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById("minutos").innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById("segundos").innerText = Math.floor((diff % 60000) / 1000);
+        }
+    }
+    setInterval(updateTimer, 1000); updateTimer();
+    
+    // Música
+    const audio = document.getElementById('bgAudio');
+    const musicBtn = document.getElementById('musicToggle');
+    let playing = true;
+    audio.volume = 0.25;
+    audio.play().catch(() => { playing = false; musicBtn.innerHTML = '<i class="fas fa-play"></i>'; });
+    musicBtn.onclick = () => {
+        if(playing) { audio.pause(); playing = false; musicBtn.innerHTML = '<i class="fas fa-play"></i>'; }
+        else { audio.play(); playing = true; musicBtn.innerHTML = '<i class="fas fa-pause"></i>'; }
+    };
+    
+    // RSVP Firebase
+    const form = document.getElementById('rsvpForm');
+    const msgDiv = document.getElementById('msgConfirm');
+    const confirmContainer = document.getElementById('confirmadosList');
+    
+    async function loadConfirmados() {
+        if(window.db) {
+            try {
+                const q = query(collection(window.db, "confirmados"), orderBy("fecha", "desc"), limit(20));
+                const snap = await getDocs(q);
+                confirmContainer.innerHTML = "";
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    const span = document.createElement('span');
+                    span.className = 'confirmados-badge';
+                    span.innerHTML = `<i class="fas fa-check-circle" style="color:#bc2f3e;"></i> ${data.familia} · ${data.nombre}`;
+                    confirmContainer.appendChild(span);
+                });
+                if(confirmContainer.children.length === 0) confirmContainer.innerHTML = '<span class="confirmados-badge">Aún sin confirmaciones</span>';
+            } catch(e) { console.warn(e); }
+        } else {
+            const localData = JSON.parse(localStorage.getItem("confirmados_victorian") || "[]");
+            confirmContainer.innerHTML = localData.map(c => `<span class="confirmados-badge"><i class="fas fa-check-circle"></i> ${c.familia} · ${c.nombre}</span>`).join('') || '<span class="confirmados-badge">Sin confirmaciones</span>';
+        }
+    }
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const familia = document.getElementById('familia').value.trim();
+        const nombre = document.getElementById('nombre').value.trim();
+        if(!familia || !nombre) { msgDiv.innerText = "❀ Completa ambos campos ❀"; return; }
+        const data = { familia, nombre, fecha: new Date().toISOString() };
+        if(window.db) {
+            try {
+                await addDoc(collection(window.db, "confirmados"), data);
+                msgDiv.innerText = `🏰 ¡Excelencia! ${nombre} de ${familia}, confirmado. 🏰`;
+                form.reset();
+                loadConfirmados();
+            } catch(error) { msgDiv.innerText = "❀ Error al guardar. ❀"; }
+        } else {
+            let lista = JSON.parse(localStorage.getItem("confirmados_victorian") || "[]");
+            lista.unshift(data);
+            localStorage.setItem("confirmados_victorian", JSON.stringify(lista.slice(0,20)));
+            msgDiv.innerText = `🏰 ${nombre} (${familia}) confirmado localmente.`;
+            form.reset();
+            const localLista = JSON.parse(localStorage.getItem("confirmados_victorian") || "[]");
+            confirmContainer.innerHTML = localLista.map(c => `<span class="confirmados-badge"><i class="fas fa-check-circle"></i> ${c.familia} · ${c.nombre}</span>`).join('');
+        }
+        setTimeout(() => msgDiv.innerText = "", 3500);
+    });
+    
+    loadConfirmados();
+</script>
+</body>
+</html>
