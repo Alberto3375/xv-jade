@@ -8,34 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400;14..32,500;14..32,600&family=Cinzel:wght@400;500;600;700;800;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <!-- Font Awesome 6 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- Firebase SDKs (configuracion demostrativa con fallback local) -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getFirestore, collection, addDoc, query, orderBy, getDocs, limit } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-  
-  const firebaseConfig = {
-    apiKey: "AIzaSyB7Yc9S9x8Lx9x9x9x9x9x9x9x9x9x9x9x",
-    authDomain: "xv-jade-victorian.firebaseapp.com",
-    projectId: "xv-jade-victorian",
-    storageBucket: "xv-jade-victorian.firebasestorage.app",
-    messagingSenderId: "123456789012",
-    appId: "1:123456789012:web:abcdef1234567890"
-  };
-  
-  let db;
-  try {
-    const firebaseApp = initializeApp(firebaseConfig);
-    db = getFirestore(firebaseApp);
-    console.log("Firebase conectado");
-  } catch(e) {
-    console.warn("Firebase no disponible, usando almacenamiento local");
-    db = null;
-  }
-  
-  window.db = db;
-  window.addDoc = addDoc;
-  window.collection = collection;
-</script>
 <style>
 * {
     margin: 0;
@@ -51,7 +23,7 @@ body {
     scroll-behavior: smooth;
 }
 
-/* Fondo victoriano dramático: rojo sangre, negro y textura de pergamino SIN IMAGENES */
+/* Fondo victoriano dramático */
 body::before {
     content: "";
     position: fixed;
@@ -76,7 +48,6 @@ body::after {
     z-index: -1;
 }
 
-/* Scroll con estilo victoriano */
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -86,10 +57,9 @@ body::after {
 ::-webkit-scrollbar-thumb {
     background: #c02b3c;
     border-radius: 20px;
-    box-shadow: inset 0 0 2px #d4af37;
 }
 
-/* Ornamentos victorianos en esquinas - PURAMENTE CSS SIN IMAGENES */
+/* Ornamentos victorianos CSS puro */
 .filigrana-esquina {
     position: fixed;
     width: 100px;
@@ -98,72 +68,15 @@ body::after {
     z-index: 100;
     opacity: 0.7;
 }
-.esquina-tl {
-    top: 15px;
-    left: 15px;
-    border-top: 2px solid #c02b3c;
-    border-left: 2px solid #c02b3c;
-    width: 70px;
-    height: 70px;
-}
-.esquina-tl::before {
-    content: "✦";
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    color: #d4af37;
-    font-size: 20px;
-}
-.esquina-tr {
-    top: 15px;
-    right: 15px;
-    border-top: 2px solid #c02b3c;
-    border-right: 2px solid #c02b3c;
-    width: 70px;
-    height: 70px;
-}
-.esquina-tr::before {
-    content: "✦";
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    color: #d4af37;
-    font-size: 20px;
-}
-.esquina-bl {
-    bottom: 15px;
-    left: 15px;
-    border-bottom: 2px solid #c02b3c;
-    border-left: 2px solid #c02b3c;
-    width: 70px;
-    height: 70px;
-}
-.esquina-bl::before {
-    content: "✦";
-    position: absolute;
-    bottom: -8px;
-    left: -8px;
-    color: #d4af37;
-    font-size: 20px;
-}
-.esquina-br {
-    bottom: 15px;
-    right: 15px;
-    border-bottom: 2px solid #c02b3c;
-    border-right: 2px solid #c02b3c;
-    width: 70px;
-    height: 70px;
-}
-.esquina-br::before {
-    content: "✦";
-    position: absolute;
-    bottom: -8px;
-    right: -8px;
-    color: #d4af37;
-    font-size: 20px;
-}
+.esquina-tl { top: 15px; left: 15px; border-top: 2px solid #c02b3c; border-left: 2px solid #c02b3c; width: 70px; height: 70px; }
+.esquina-tl::before { content: "✦"; position: absolute; top: -8px; left: -8px; color: #d4af37; font-size: 20px; }
+.esquina-tr { top: 15px; right: 15px; border-top: 2px solid #c02b3c; border-right: 2px solid #c02b3c; width: 70px; height: 70px; }
+.esquina-tr::before { content: "✦"; position: absolute; top: -8px; right: -8px; color: #d4af37; font-size: 20px; }
+.esquina-bl { bottom: 15px; left: 15px; border-bottom: 2px solid #c02b3c; border-left: 2px solid #c02b3c; width: 70px; height: 70px; }
+.esquina-bl::before { content: "✦"; position: absolute; bottom: -8px; left: -8px; color: #d4af37; font-size: 20px; }
+.esquina-br { bottom: 15px; right: 15px; border-bottom: 2px solid #c02b3c; border-right: 2px solid #c02b3c; width: 70px; height: 70px; }
+.esquina-br::before { content: "✦"; position: absolute; bottom: -8px; right: -8px; color: #d4af37; font-size: 20px; }
 
-/* Divisor victoriano elegante */
 .victorian-divider {
     display: flex;
     justify-content: center;
@@ -179,10 +92,9 @@ body::after {
 .victorian-divider i {
     color: #c92b3e;
     font-size: 1.4rem;
-    filter: drop-shadow(0 0 4px rgba(192, 43, 60, 0.8));
 }
 
-/* Hero con fondo animado gradiente sin imagenes */
+/* Hero */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -222,7 +134,6 @@ body::after {
     text-align: center;
     max-width: 850px;
     width: 90%;
-    background: transparent;
     animation: floatUp 1s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 @keyframes floatUp {
@@ -273,7 +184,6 @@ body::after {
     border-radius: 60px;
 }
 
-/* Secciones generales */
 .section-modern {
     padding: 5rem 2rem;
     max-width: 1300px;
@@ -301,7 +211,6 @@ body::after {
     letter-spacing: 1.5px;
 }
 
-/* Grid de información */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -320,7 +229,6 @@ body::after {
 .info-card:hover {
     transform: translateY(-6px);
     border-color: #d4af37;
-    background: rgba(40, 10, 18, 0.9);
 }
 .info-card i {
     font-size: 2.5rem;
@@ -334,7 +242,6 @@ body::after {
     color: #e9d2a4;
 }
 
-/* Countdown victoriano */
 .countdown-modern {
     background: rgba(10, 2, 5, 0.7);
     backdrop-filter: blur(18px);
@@ -370,7 +277,7 @@ body::after {
     color: #d4af37;
 }
 
-/* Galería abstracta elegante SIN IMAGENES */
+/* Galería abstracta */
 .gallery-grande {
     background: rgba(5, 1, 3, 0.6);
     border-radius: 48px;
@@ -381,7 +288,7 @@ body::after {
 .victorian-carousel {
     position: relative;
     width: 100%;
-    height: 580px;
+    height: 500px;
     overflow: hidden;
     border-radius: 40px;
     box-shadow: 0 25px 45px -12px black;
@@ -415,25 +322,18 @@ body::after {
     font-size: 5rem;
     color: #d4af37;
     margin-bottom: 1.5rem;
-    text-shadow: 0 0 15px #c02b3c;
 }
 .gallery-caption {
     text-align: center;
-    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.7), transparent);
-    backdrop-filter: blur(12px);
-    padding: 16px;
     font-family: 'Cinzel', serif;
     font-size: 1.6rem;
     color: #d4af37;
     letter-spacing: 3px;
-    z-index: 5;
-    font-weight: 500;
 }
 .gallery-sub {
     font-size: 1rem;
     color: #e6c88a;
     margin-top: 0.5rem;
-    font-family: 'Inter', sans-serif;
 }
 .gallery-nav {
     position: absolute;
@@ -451,22 +351,18 @@ body::after {
     background: rgba(255,255,255,0.4);
     border-radius: 50%;
     cursor: pointer;
-    transition: 0.2s;
     border: 1px solid #d4af37;
 }
 .gallery-dot.active-dot {
     background: #d4af37;
     transform: scale(1.3);
-    box-shadow: 0 0 10px #c02b3c;
 }
 
-/* Mapa elegante (iframe real) */
 .map-container {
     border-radius: 2rem;
     overflow: hidden;
     border: 1px solid rgba(192, 43, 60, 0.7);
     margin: 2rem 0;
-    box-shadow: 0 15px 25px -12px black;
 }
 .map-container iframe {
     width: 100%;
@@ -474,7 +370,6 @@ body::after {
     display: block;
 }
 
-/* Formulario victoriano */
 .form-modern {
     background: rgba(10, 3, 7, 0.85);
     backdrop-filter: blur(24px);
@@ -547,10 +442,6 @@ body::after {
 .btn-sheen {
     background: linear-gradient(135deg, #0a0a14, #1f1825);
     border: 1.5px solid #d4af37;
-    margin-top: 1rem;
-}
-.btn-sheen i {
-    color: #e6c27a;
 }
 .confirmados-badge {
     background: rgba(188, 47, 62, 0.2);
@@ -559,6 +450,8 @@ body::after {
     padding: 0.5rem 1.2rem;
     font-size: 0.85rem;
     font-family: 'Inter', sans-serif;
+    display: inline-block;
+    margin: 0.2rem;
 }
 .music-player {
     position: fixed;
@@ -591,21 +484,19 @@ footer {
 }
 @media (max-width: 768px) {
     .victorian-carousel { height: 420px; }
-    .gallery-caption { font-size: 1rem; padding: 10px; }
+    .gallery-caption { font-size: 1rem; }
     .section-modern { padding: 3rem 1rem; }
-    .filigrana-esquina { width: 50px; height: 50px; }
 }
 </style>
 </head>
 <body>
 
-<!-- Ornamentos victorianos -->
 <div class="filigrana-esquina esquina-tl"></div>
 <div class="filigrana-esquina esquina-tr"></div>
 <div class="filigrana-esquina esquina-bl"></div>
 <div class="filigrana-esquina esquina-br"></div>
 
-<!-- HERO PRINCIPAL -->
+<!-- HERO -->
 <section class="hero">
     <div class="animated-bg">
         <div class="glow glow1"></div>
@@ -621,7 +512,7 @@ footer {
     </div>
 </section>
 
-<!-- INFORMACIÓN DEL LEGADO -->
+<!-- INFORMACIÓN -->
 <section class="section-modern">
     <div class="victorian-divider"><i class="fas fa-gem"></i><span class="line"></span><i class="fas fa-feather-alt"></i><span class="line"></span><i class="fas fa-gem"></i></div>
     <h2 class="section-title">El Legado Victoriano</h2>
@@ -640,17 +531,17 @@ footer {
     <div class="countdown-modern"><div class="countdown-flex"><div class="time-block"><div class="time-number" id="dias">00</div><div class="time-label">Días</div></div><div class="time-block"><div class="time-number" id="horas">00</div><div class="time-label">Horas</div></div><div class="time-block"><div class="time-number" id="minutos">00</div><div class="time-label">Min</div></div><div class="time-block"><div class="time-number" id="segundos">00</div><div class="time-label">Seg</div></div></div></div>
 </section>
 
-<!-- MAPA (REAL, CON iframe) -->
+<!-- MAPA -->
 <section class="section-modern">
     <div class="victorian-divider"><i class="fas fa-map-marker-alt"></i><span class="line"></span><i class="fas fa-location-dot"></i><span class="line"></span><i class="fas fa-map-marker-alt"></i></div>
     <h2 class="section-title">Salón de Gala</h2>
     <div class="subhead">Event's Salón Jardín · Guadalajara</div>
     <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.877542087836!2d-103.2696644!3d20.6338477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b3e7f75c2e97%3A0x6feb2b0530e57a89!2zRXZlbnQgU2Fsw7NuIEphcmRDrW4!5e0!3m2!1ses!2smx!4v1775666013018!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.877542087836!2d-103.2696644!3d20.6338477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b3e7f75c2e97%3A0x6feb2b0530e57a89!2zRXZlbnQgU2Fsw7NuIEphcmRDrW4!5e0!3m2!1ses!2smx!4v1775666013018!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
 </section>
 
-<!-- GALERÍA VICTORIANA SIN IMAGENES (abstracta con íconos) -->
+<!-- GALERÍA SIN IMÁGENES -->
 <section class="section-modern">
     <div class="victorian-divider"><i class="fas fa-camera-retro"></i><span class="line"></span><i class="fas fa-images"></i><span class="line"></span><i class="fas fa-camera-retro"></i></div>
     <h2 class="section-title">Galería Eterna</h2>
@@ -663,7 +554,7 @@ footer {
     </div>
 </section>
 
-<!-- CONFIRMACIÓN -->
+<!-- CONFIRMACIÓN CON WHATSAPP -->
 <section class="section-modern">
     <div class="victorian-divider"><i class="fas fa-scroll"></i><span class="line"></span><i class="fas fa-feather-alt"></i><span class="line"></span><i class="fas fa-scroll"></i></div>
     <h2 class="section-title">Confirmad Presencia</h2>
@@ -672,35 +563,32 @@ footer {
         <form id="rsvpForm">
             <div class="input-group"><label><i class="fas fa-users"></i> Familia / Casa</label><input type="text" id="familia" placeholder="Ej: Familia Méndez" required></div>
             <div class="input-group"><label><i class="fas fa-user"></i> Nombre completo</label><input type="text" id="nombre" placeholder="Tu nombre" required></div>
-            <button type="submit" class="btn-blood"><i class="fas fa-check-double"></i> Confirmar Asistencia</button>
+            <button type="submit" class="btn-blood"><i class="fab fa-whatsapp"></i> Confirmar por WhatsApp</button>
             <div id="msgConfirm" style="text-align:center; margin-top:1rem; font-size:0.85rem;"></div>
         </form>
         <div style="margin-top: 2rem; text-align:center;"><h4 style="color:#d4af37; font-family: 'Cinzel', serif;"><i class="fas fa-crown"></i> Almas confirmadas</h4><div id="confirmadosList" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.7rem; margin-top:1rem;"></div></div>
     </div>
 </section>
 
-<!-- REGALOS: LIVERPOOL + SHEIN LISTA DE DESEOS -->
+<!-- REGALOS -->
 <section class="section-modern" style="text-align:center;">
     <div class="victorian-divider"><i class="fas fa-gift"></i><span class="line"></span><i class="fas fa-diamond"></i><span class="line"></span><i class="fas fa-gift"></i></div>
     <h2 class="section-title">Tesoros & Deseos</h2>
     <div class="subhead">Un detalle para honrar este legado</div>
-    <div class="victorian-divider" style="margin: 2rem auto 1rem auto; width: 70%;"><span class="line"></span><i class="fas fa-star-of-life"></i><span class="line"></span></div>
-    <h3 style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color:#e6c27a;">Wishlist Shein</h3>
-    <a href="https://api-shein.shein.com/h5/sharejump/appjump?link=l08IUia8KTT_9_1&localcountry=MX&shc=2_l08IUia8KTT_9_1" target="_blank" rel="noopener noreferrer" class="btn-regalo btn-sheen" style="margin-top: 0.8rem;"><i class="fab fa-shein"></i> Ver mi lista de deseos SHEIN</a>
-    <p style="margin-top: 1rem; font-size: 0.85rem;"><i class="fas fa-crown"></i> El estilo victoriano también inspira moda · Regalos soñados en SHEIN</p>
+    <a href="#" id="liverpoolBtn" class="btn-regalo"><i class="fas fa-shopping-bag"></i> Liverpool · Palacio</a>
+    <a href="https://api-shein.shein.com/h5/sharejump/appjump?link=l08IUia8KTT_9_1&localcountry=MX&shc=2_l08IUia8KTT_9_1" target="_blank" class="btn-regalo btn-sheen"><i class="fab fa-shein"></i> Lista SHEIN</a>
 </section>
 
 <footer>
     <div class="victorian-divider"><i class="fas fa-crown"></i><span class="line"></span><i class="fas fa-heart"></i><span class="line"></span><i class="fas fa-crown"></i></div>
     <p style="font-family: 'Great Vibes', cursive; font-size: 1.8rem;">"La elegancia nunca pasa de moda"</p>
-    <p>24 de Mayo 2026 · Catedral de Guadalajara 5:00 p.m. · Event's salón Jardín 7:00 p.m.</p>
-    <p>Formal casual · Prohibido dorado, beige y rojo brillante · Lluvia de sobres</p>
+    <p>24 de Mayo 2026 · Catedral 5:00 p.m. · Salón Jardín 7:00 p.m.</p>
 </footer>
 
 <div class="music-player"><button id="musicToggle"><i class="fas fa-pause"></i></button><span>Vals Victoriano</span><audio id="bgAudio" loop autoplay><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio></div>
 
-<script type="module">
-    // Galería abstracta sin imágenes (íconos y texto)
+<script>
+    // Galería abstracta
     const galleryItems = [
         { icon: "fas fa-crown", title: "Majestad Escarlata", desc: "El poder de una nueva era" },
         { icon: "fas fa-gem", title: "Brillo de Sangre", desc: "Pasión y nobleza" },
@@ -722,25 +610,15 @@ footer {
             const slide = document.createElement('div');
             slide.className = 'gallery-slide';
             if(idx === 0) slide.classList.add('active');
-            slide.innerHTML = `
-                <div class="gallery-icon"><i class="${item.icon}"></i></div>
-                <div class="gallery-caption">${item.title} ✦</div>
-                <div class="gallery-sub">${item.desc}</div>
-            `;
+            slide.innerHTML = `<div class="gallery-icon"><i class="${item.icon}"></i></div><div class="gallery-caption">${item.title} ✦</div><div class="gallery-sub">${item.desc}</div>`;
             container.appendChild(slide);
-            
             const dot = document.createElement('div');
             dot.className = 'gallery-dot';
             if(idx === 0) dot.classList.add('active-dot');
-            dot.addEventListener('click', () => {
-                stopGalleryAuto();
-                goToSlide(idx);
-                startGalleryAuto();
-            });
+            dot.addEventListener('click', () => { stopAuto(); goToSlide(idx); startAuto(); });
             dotsContainer.appendChild(dot);
         });
     }
-    
     function goToSlide(index) {
         const slides = document.querySelectorAll('.gallery-slide');
         const dots = document.querySelectorAll('.gallery-dot');
@@ -751,19 +629,12 @@ footer {
         slides[currentGallery].classList.add('active');
         dots[currentGallery].classList.add('active-dot');
     }
-    
     function nextSlide() { goToSlide(currentGallery + 1); }
-    function startGalleryAuto() { if(galleryInterval) clearInterval(galleryInterval); galleryInterval = setInterval(nextSlide, 5000); }
-    function stopGalleryAuto() { if(galleryInterval) clearInterval(galleryInterval); }
-    
-    buildGallery();
-    startGalleryAuto();
-    
+    function startAuto() { if(galleryInterval) clearInterval(galleryInterval); galleryInterval = setInterval(nextSlide, 5000); }
+    function stopAuto() { if(galleryInterval) clearInterval(galleryInterval); }
+    buildGallery(); startAuto();
     const carouselDiv = document.querySelector('.victorian-carousel');
-    if(carouselDiv) {
-        carouselDiv.addEventListener('mouseenter', stopGalleryAuto);
-        carouselDiv.addEventListener('mouseleave', startGalleryAuto);
-    }
+    if(carouselDiv) { carouselDiv.addEventListener('mouseenter', stopAuto); carouselDiv.addEventListener('mouseleave', startAuto); }
     
     // Countdown
     function updateTimer() {
@@ -790,57 +661,74 @@ footer {
         else { audio.play(); playing = true; musicBtn.innerHTML = '<i class="fas fa-pause"></i>'; }
     };
     
-    // RSVP Firebase
-    const form = document.getElementById('rsvpForm');
-    const msgDiv = document.getElementById('msgConfirm');
-    const confirmContainer = document.getElementById('confirmadosList');
+    // NÚMERO DE WHATSAPP (cámbialo por el número real de los organizadores)
+    const WHATSAPP_NUMBER = "521234567890"; // PON AQUÍ EL NÚMERO CON CÓDIGO PAÍS SIN SIGNO + ni espacios, ej: 521234567890
     
-    async function loadConfirmados() {
-        if(window.db) {
-            try {
-                const q = query(collection(window.db, "confirmados"), orderBy("fecha", "desc"), limit(20));
-                const snap = await getDocs(q);
-                confirmContainer.innerHTML = "";
-                snap.forEach(doc => {
-                    const data = doc.data();
-                    const span = document.createElement('span');
-                    span.className = 'confirmados-badge';
-                    span.innerHTML = `<i class="fas fa-check-circle" style="color:#bc2f3e;"></i> ${data.familia} · ${data.nombre}`;
-                    confirmContainer.appendChild(span);
-                });
-                if(confirmContainer.children.length === 0) confirmContainer.innerHTML = '<span class="confirmados-badge">Aún sin confirmaciones</span>';
-            } catch(e) { console.warn(e); }
-        } else {
-            const localData = JSON.parse(localStorage.getItem("confirmados_victorian") || "[]");
-            confirmContainer.innerHTML = localData.map(c => `<span class="confirmados-badge"><i class="fas fa-check-circle"></i> ${c.familia} · ${c.nombre}</span>`).join('') || '<span class="confirmados-badge">Sin confirmaciones</span>';
-        }
+    // Cargar confirmados desde localStorage
+    function loadConfirmados() {
+        const localData = JSON.parse(localStorage.getItem("confirmados_victorian") || "[]");
+        const confirmContainer = document.getElementById('confirmadosList');
+        confirmContainer.innerHTML = localData.map(c => `<span class="confirmados-badge"><i class="fas fa-check-circle"></i> ${c.familia} · ${c.nombre}</span>`).join('');
+        if(confirmContainer.children.length === 0) confirmContainer.innerHTML = '<span class="confirmados-badge">Aún sin confirmaciones</span>';
     }
     
-    form.addEventListener('submit', async (e) => {
+    // Guardar confirmación en localStorage
+    function saveConfirmation(familia, nombre) {
+        let lista = JSON.parse(localStorage.getItem("confirmados_victorian") || "[]");
+        lista.unshift({ familia, nombre, fecha: new Date().toISOString() });
+        localStorage.setItem("confirmados_victorian", JSON.stringify(lista.slice(0, 30)));
+        loadConfirmados();
+    }
+    
+    // Enviar mensaje por WhatsApp con los datos del formulario
+    function sendWhatsAppConfirmation(familia, nombre) {
+        // Mensaje elegante y detallado
+        const mensaje = `✨ CONFIRMACIÓN XV JADE YAMILET ✨%0A%0A🏰 Familia / Casa: ${familia}%0A👑 Nombre: ${nombre}%0A📅 Fecha: 24 de Mayo 2026%0A📍 Evento: XV Años - Jade Yamilet%0A💫 "Confirmo mi asistencia con honor y alegría"%0A%0A¡Gracias por ser parte de este legado victoriano! 🕯️`;
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`;
+        window.open(url, '_blank');
+    }
+    
+    // Manejar el envío del formulario
+    const form = document.getElementById('rsvpForm');
+    const msgDiv = document.getElementById('msgConfirm');
+    
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
         const familia = document.getElementById('familia').value.trim();
         const nombre = document.getElementById('nombre').value.trim();
-        if(!familia || !nombre) { msgDiv.innerText = "❀ Completa ambos campos ❀"; return; }
-        const data = { familia, nombre, fecha: new Date().toISOString() };
-        if(window.db) {
-            try {
-                await addDoc(collection(window.db, "confirmados"), data);
-                msgDiv.innerText = `🏰 ¡Excelencia! ${nombre} de ${familia}, confirmado. 🏰`;
-                form.reset();
-                loadConfirmados();
-            } catch(error) { msgDiv.innerText = "❀ Error al guardar. ❀"; }
-        } else {
-            let lista = JSON.parse(localStorage.getItem("confirmados_victorian") || "[]");
-            lista.unshift(data);
-            localStorage.setItem("confirmados_victorian", JSON.stringify(lista.slice(0,20)));
-            msgDiv.innerText = `🏰 ${nombre} (${familia}) confirmado localmente.`;
-            form.reset();
-            const localLista = JSON.parse(localStorage.getItem("confirmados_victorian") || "[]");
-            confirmContainer.innerHTML = localLista.map(c => `<span class="confirmados-badge"><i class="fas fa-check-circle"></i> ${c.familia} · ${c.nombre}</span>`).join('');
+        
+        if(!familia || !nombre) {
+            msgDiv.innerText = "❀ Por favor completa ambos campos ❀";
+            msgDiv.style.color = "#e6b87a";
+            setTimeout(() => msgDiv.innerText = "", 3000);
+            return;
         }
-        setTimeout(() => msgDiv.innerText = "", 3500);
+        
+        // Guardar en localStorage
+        saveConfirmation(familia, nombre);
+        
+        // Enviar a WhatsApp
+        sendWhatsAppConfirmation(familia, nombre);
+        
+        // Mostrar mensaje de éxito
+        msgDiv.innerHTML = `<i class="fab fa-whatsapp"></i> ¡Gracias ${nombre}! Redirigiendo a WhatsApp...`;
+        msgDiv.style.color = "#d4af37";
+        
+        // Limpiar campos
+        form.reset();
+        
+        setTimeout(() => {
+            msgDiv.innerText = "";
+        }, 4000);
     });
     
+    // Botones de regalos
+    document.getElementById('liverpoolBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("✨ Liverpool: Cuenta XVJADE2026 · Palacio de Hierro: XV-JADE-2026 ✨");
+    });
+    
+    // Cargar confirmados al inicio
     loadConfirmados();
 </script>
 </body>
