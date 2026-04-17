@@ -3,263 +3,398 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Invitación XV | Abre el sobre</title>
+<title>XV Jade Yamilet | Pergamino Victoriano · Abre el Sobre</title>
 
-<!-- Fuentes simples pero elegantes -->
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Fuentes victorianas refinadas -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+  /* ==============================================
+     RESET Y VARIABLES VICTORIANAS
+     ============================================== */
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
+  :root {
+    --oro-victoriano: #d4af37;
+    --oro-oscuro: #b88a44;
+    --sangre: #8b2a2e;
+    --sangre-profunda: #5e1a1f;
+    --pergamino-base: #fef5e6;
+    --pergamino-sombra: #e8dcc8;
+    --tinta-negra: #2c1a12;
+  }
+
   body {
     min-height: 100vh;
-    background: radial-gradient(circle at 30% 20%, #2c0f18, #0a0306);
+    background: radial-gradient(circle at 20% 30%, #2a1410, #0a0402);
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Cormorant Garamond', serif;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-x: hidden;
+    position: relative;
   }
 
-  /* contenedor para centrar */
+  /* ==============================================
+     FONDO DE PERGAMINO Y TEXTURAS VICTORIANAS
+     ============================================== */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 800" opacity="0.12"><path fill="none" stroke="%23d4a373" stroke-width="0.7" d="M60 70 L440 70 M60 730 L440 730 M110 40 L110 760 M390 40 L390 760" stroke-dasharray="5 7"/><path fill="none" stroke="%23b87c4f" stroke-width="0.5" d="M80 90 L420 90 M80 710 L420 710 M130 60 L130 740 M370 60 L370 740"/><circle cx="250" cy="400" r="100" fill="none" stroke="%23c99567" stroke-width="0.4" stroke-dasharray="4 6"/><text x="250" y="50" font-size="9" fill="%23cfa87c" font-family="Cinzel" text-anchor="middle" letter-spacing="4">⚜️ SANGRE · HONOR · ETERNIDAD ⚜️</text><text x="250" y="770" font-size="8" fill="%23cfa87c" font-family="Cinzel" text-anchor="middle" letter-spacing="3">XV JADE YAMILET · MMXXVI</text></svg>') repeat;
+    background-size: 350px 700px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.3;
+  }
+
+  /* ==============================================
+     CONTENEDOR PRINCIPAL
+     ============================================== */
   .center-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    padding: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    z-index: 2;
   }
 
-  /* caja principal con perspectiva */
+  /* ==============================================
+     CAJA DEL SOBRE CON PERSPECTIVA VICTORIANA
+     ============================================== */
   .envelope-box {
-    perspective: 1300px;
+    perspective: 1500px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.7));
   }
 
-  /* SOBRE - estilo refinado */
+  /* SOBRE PRINCIPAL - estilo victoriano con bordes dorados */
   .envelope {
-    width: 360px;
-    height: 230px;
+    width: 440px;
+    height: 270px;
     position: relative;
-    background: linear-gradient(145deg, #2e1722, #1b0b12);
-    border-radius: 18px;
-    box-shadow: 0 25px 40px -12px black, inset 0 1px 0 rgba(255,255,240,0.1);
-    transition: transform 0.2s ease;
+    background: linear-gradient(145deg, #2f1a16, #180c08);
+    border-radius: 24px;
+    box-shadow: 0 30px 50px -18px black, inset 0 1px 0 rgba(230, 200, 120, 0.2);
+    transition: transform 0.25s ease;
     z-index: 10;
+    border: 1px solid rgba(212, 175, 55, 0.55);
   }
 
-  /* tapa triangular superior */
+  /* Esquinas decorativas doradas */
+  .corner-deco-tl, .corner-deco-tr, .corner-deco-bl, .corner-deco-br {
+    position: absolute;
+    font-size: 20px;
+    color: var(--oro-victoriano);
+    opacity: 0.55;
+    pointer-events: none;
+    font-family: 'Cinzel', serif;
+  }
+  .corner-deco-tl { top: 12px; left: 16px; }
+  .corner-deco-tr { top: 12px; right: 16px; }
+  .corner-deco-bl { bottom: 12px; left: 16px; }
+  .corner-deco-br { bottom: 12px; right: 16px; }
+
+  /* Tapa triangular del sobre */
   .flap {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(125deg, #3f202e, #26131c);
-    clip-path: polygon(0 0, 100% 0, 50% 58%);
+    background: linear-gradient(125deg, #4a2e28, #2a1612);
+    clip-path: polygon(0 0, 100% 0, 50% 60%);
     transform-origin: top;
     transition: transform 0.9s cubic-bezier(0.68, -0.3, 0.32, 1.2);
-    border-radius: 18px 18px 0 0;
+    border-radius: 24px 24px 0 0;
     z-index: 4;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   }
 
-  /* pequeño detalle dorado en la tapa */
+  /* Filigrana en la tapa */
+  .flap::before {
+    content: "✧ VICTORIA ✧";
+    position: absolute;
+    bottom: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #e2bc7c;
+    font-size: 14px;
+    opacity: 0.5;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 3px;
+    white-space: nowrap;
+  }
+
   .flap::after {
     content: "";
     position: absolute;
-    bottom: 10%;
-    left: 25%;
-    width: 50%;
-    height: 2px;
-    background: radial-gradient(circle, #e7bf6d, #b38f40);
-    border-radius: 2px;
-    opacity: 0.6;
+    bottom: 12%;
+    left: 15%;
+    width: 70%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--oro-victoriano), #f3e0b0, var(--oro-victoriano), transparent);
+    opacity: 0.8;
   }
 
-  /* sello de cera */
+  /* SELLO DE LACRE VICTORIANO */
   .seal {
     position: absolute;
-    width: 68px;
-    height: 68px;
-    background: radial-gradient(circle at 35% 35%, #d42e44, #941a2b);
+    width: 82px;
+    height: 82px;
+    background: radial-gradient(circle at 35% 35%, #c72f3e, #7e1825);
     border-radius: 50%;
-    bottom: 12px;
+    bottom: 6px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
     transition: all 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,235,170,0.8);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.6), inset 0 1px 3px rgba(255,240,170,0.8);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
-    color: #ffeaaf;
-    font-family: 'Segoe UI', system-ui;
+    font-size: 36px;
+    color: #fae67a;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    border: 1px solid #eeb55b;
   }
 
-  /* HOJA BLANCA (pergamino vacío) */
+  /* ==============================================
+     PERGAMINO INTERIOR (se despliega al abrir)
+     ============================================== */
   .blank-sheet {
     position: absolute;
-    width: 280px;
+    width: 350px;
     height: 0px;
-    background: #fffef7;
-    background: linear-gradient(145deg, #ffffff, #fef9ef);
+    background: linear-gradient(145deg, #fff9ef, #f9efdf);
     left: 50%;
     transform: translateX(-50%);
     top: 48%;
-    border-radius: 14px;
-    box-shadow: 0 18px 35px -6px rgba(0,0,0,0.5);
+    border-radius: 18px;
+    box-shadow: 0 20px 40px -8px rgba(0,0,0,0.6);
     overflow: hidden;
-    transition: height 0.85s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+    transition: height 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.2);
     z-index: 12;
-    border: 1px solid #ebdfb7;
+    border: 1px solid #e2cd9a;
+    border-top: 2px solid #dbb87a;
   }
 
-  /* contenido interior: absolutamente vacío, solo fondo blanco suave */
-  .sheet-inner {
-    opacity: 0;
-    transition: opacity 0.01s;
-    /* no agregamos texto, permanece en blanco */
+  /* Textura de pergamino */
+  .blank-sheet::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: #fffef7;
-    border-radius: 14px;
+    background: repeating-linear-gradient(45deg, rgba(180, 140, 80, 0.06) 0px, rgba(180, 140, 80, 0.06) 2px, transparent 2px, transparent 14px);
+    pointer-events: none;
   }
 
-  /* efecto de apertura: tapa rotada */
+  .sheet-inner {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+  }
+
+  /* Contenido decorativo del pergamino (elegante y vacío pero con simbolismo) */
+  .pergamino-symbol {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.4rem;
+    color: #8b3e2a;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #dba55a;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .ornament-line {
+    width: 60%;
+    height: 1px;
+    background: radial-gradient(circle, #e7bf6d, #b88844);
+    margin: 12px auto;
+  }
+
+  .pergamino-texto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: #6a3e2c;
+    margin-top: 12px;
+    font-style: italic;
+    letter-spacing: 0.5px;
+  }
+
+  /* ==============================================
+     ESTADOS DE APERTURA
+     ============================================== */
   .open .flap {
     transform: rotateX(180deg);
   }
 
-  /* sello desaparece */
   .open .seal {
     opacity: 0;
     transform: translateX(-50%) scale(0);
     pointer-events: none;
   }
 
-  /* el pergamino se despliega completamente */
   .open .blank-sheet {
-    height: 340px;   /* altura suficiente para simular una hoja */
+    height: 400px;
   }
 
-  /* no es necesario que muestre texto, pero la hoja ya es visible */
   .open .sheet-inner {
     opacity: 1;
   }
 
-  /* fade out del body para transición a la otra página */
+  /* Fade out para transición a la siguiente página */
   body.fade-out {
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.95s ease;
+    transition: opacity 1s ease;
   }
 
-  /* pequeño texto de instrucción */
+  /* ==============================================
+     HINT O INDICACIÓN VICTORIANA
+     ============================================== */
   .tap-hint {
-    margin-top: 28px;
-    font-family: 'Cormorant Garamond', serif;
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(4px);
-    padding: 8px 20px;
-    border-radius: 50px;
+    margin-top: 35px;
+    font-family: 'Cinzel', serif;
+    background: rgba(10, 5, 3, 0.75);
+    backdrop-filter: blur(8px);
+    padding: 12px 32px;
+    border-radius: 60px;
     color: #eeddbb;
-    font-size: 16px;
-    letter-spacing: 1px;
+    font-size: 15px;
+    letter-spacing: 2.5px;
     font-weight: 500;
-    border: 1px solid rgba(220, 180, 80, 0.4);
+    border: 1px solid rgba(212, 175, 55, 0.65);
     transition: all 0.2s;
   }
 
   .tap-hint i {
-    margin-right: 8px;
+    margin-right: 10px;
     font-size: 14px;
   }
 
-  /* al hacer hover en el sobre, una leve escala */
   .envelope-box:hover .envelope {
     transform: scale(1.01);
   }
 
-  /* adaptación móvil */
-  @media (max-width: 480px) {
+  /* ==============================================
+     RESPONSIVE
+     ============================================== */
+  @media (max-width: 550px) {
     .envelope {
-      width: 300px;
-      height: 200px;
+      width: 330px;
+      height: 220px;
     }
     .blank-sheet {
-      width: 250px;
+      width: 280px;
     }
     .open .blank-sheet {
-      height: 300px;
+      height: 360px;
+    }
+    .seal {
+      width: 66px;
+      height: 66px;
+      font-size: 28px;
+      bottom: 4px;
     }
     .tap-hint {
+      font-size: 11px;
+      margin-top: 25px;
+      padding: 8px 20px;
+    }
+    .sheet-inner {
+      padding: 1rem;
+    }
+    .pergamino-symbol {
+      font-size: 1.8rem;
+    }
+    .corner-deco-tl, .corner-deco-tr, .corner-deco-bl, .corner-deco-br {
       font-size: 14px;
-      margin-top: 24px;
+    }
+    .flap::before {
+      font-size: 10px;
+      bottom: 15%;
     }
   }
 
-  /* detalle decorativo en sobre (líneas doradas) */
-  .envelope::before {
+  /* Detalle extra: efecto de brillo en el sello */
+  .seal::after {
     content: "";
     position: absolute;
-    top: 18px;
-    left: 18px;
-    width: calc(100% - 36px);
-    height: calc(100% - 36px);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 12px;
-    pointer-events: none;
-  }
-
-  /* hoja en blanco: efecto sutil de papel antiguo */
-  .blank-sheet::after {
-    content: "";
-    position: absolute;
-    bottom: 8px;
-    right: 12px;
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle, rgba(200,170,110,0.08) 0%, rgba(255,255,245,0) 70%);
-    pointer-events: none;
+    top: 15%;
+    left: 20%;
+    width: 25%;
+    height: 25%;
+    background: radial-gradient(circle, rgba(255,245,180,0.7), transparent);
     border-radius: 50%;
   }
 </style>
-
 </head>
 <body>
 
 <div class="center-wrapper">
   <div class="envelope-box" id="envelopeTrigger">
-    <!-- SOBRE PRINCIPAL -->
+    <!-- SOBRE VICTORIANO COMPLETO -->
     <div class="envelope">
-      <!-- tapa que se levanta -->
+      <!-- Esquinas ornamentales -->
+      <div class="corner-deco-tl">⚜️</div>
+      <div class="corner-deco-tr">⚜️</div>
+      <div class="corner-deco-bl">⚜️</div>
+      <div class="corner-deco-br">⚜️</div>
+      
+      <!-- Tapa que se levanta -->
       <div class="flap"></div>
       
-      <!-- hoja/blanco que aparece al abrir -->
+      <!-- Pergamino que se despliega elegantemente -->
       <div class="blank-sheet">
-        <div class="sheet-inner"></div>
-        <!-- No hay texto, está completamente vacío / blanco -->
+        <div class="sheet-inner">
+          <div class="pergamino-symbol">❦ Jade Yamilet ❦</div>
+          <div class="ornament-line"></div>
+          <div class="pergamino-texto">
+            "El destino se escribe en pergamino<br>
+            y la gloria se hereda en la sangre"
+          </div>
+          <div class="ornament-line" style="width: 40%; margin-top: 16px;"></div>
+          <div style="margin-top: 14px; font-size: 0.75rem; color: #a76e4a; font-family: 'Cinzel'; letter-spacing: 1px;">XV PRIMAVERAS · MMXXVI</div>
+        </div>
       </div>
       
-      <!-- sello decorativo -->
+      <!-- Sello de lacre real victoriano -->
       <div class="seal">
         ✦
       </div>
     </div>
     
-    <!-- Mensaje sutil para que el usuario sepa que debe tocar -->
+    <!-- Texto indicador elegante -->
     <div class="tap-hint">
-      <i>✧</i> Toca el sobre para abrirlo <i>✧</i>
+      <i>⚜️</i> ROMPED EL SELLO · ABRID EL PERGAMINO <i>⚜️</i>
     </div>
   </div>
 </div>
@@ -269,28 +404,29 @@
     const trigger = document.getElementById("envelopeTrigger");
     let isOpened = false;
     
-    // Al hacer click se ejecuta la animación y luego la redirección directa
+    // Al hacer clic se ejecuta la apertura majestuosa y luego la redirección a XV.html
     trigger.addEventListener("click", (event) => {
       if (isOpened) return;
       isOpened = true;
       
-      // 1. Agregar clase 'open' para activar las transformaciones (tapa gira, sello desaparece, hoja se despliega)
+      // Añadir clase 'open' para desencadenar todas las animaciones victorianas
       trigger.classList.add("open");
       
-      // 2. Esperamos a que la hoja se vea completamente desplegada (tiempo suficiente para disfrutar la animación)
-      // Luego aplicamos el fade-out al body y redirigimos a XV.html
+      // Tiempo para que el pergamino se despliegue completamente (animación visible)
       setTimeout(() => {
         document.body.classList.add("fade-out");
-      }, 900);   // a los 0.9s empieza a desvanecerse, justo cuando la hoja ya está desplegada
+      }, 1000);   // a 1 segundo el pergamino ya está desplegado
       
-      // 3. Redirección a la página "XV.html" después de que termine el fade
+      // Redirección a la página principal de la celebración
       setTimeout(() => {
         window.location.href = "XV.html";
-      }, 1700);   // tiempo suficiente para que se vea la hoja en blanco y haga transición
+      }, 1900);   // transición suave y elegante
     });
     
-    // Prevenir doble apertura por si se hace click repetido (opcional)
-    // y añadir un pequeño feedback háptico visual (no necesario)
+    // Aseguramos el cursor tipo pointer
+    trigger.style.cursor = "pointer";
+    
+    // Prevenir doble apertura accidental mediante flag
   })();
 </script>
 </body>
