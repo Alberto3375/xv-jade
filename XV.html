@@ -23,7 +23,7 @@ body {
     scroll-behavior: smooth;
 }
 
-/* Fondo victoriano dramático */
+/* Fondo victoriano dramático para el resto de la página */
 body::before {
     content: "";
     position: fixed;
@@ -96,7 +96,7 @@ body::after {
     text-shadow: 0 0 5px #d4af37;
 }
 
-/* Hero con imagen 3.jpg */
+/* Hero con imagen 3.jpg de fondo, letras directamente sobre la imagen */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -105,50 +105,20 @@ body::after {
     position: relative;
     padding: 2rem;
     isolation: isolate;
+    background-image: url('3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
-.hero-backdrop {
+/* Overlay oscuro para mejorar legibilidad del texto, sin contenedor adicional */
+.hero::before {
+    content: "";
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-.hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.45) contrast(1.1) sepia(0.15);
-    transition: all 0.8s ease;
-}
-.hero-overlay-gradient {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(10,1,4,0.85) 90%);
-}
-.animated-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.35) 0%, rgba(10,1,4,0.75) 100%);
     z-index: 1;
 }
-.animated-bg .glow {
-    position: absolute;
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(192, 43, 60, 0.25), transparent 70%);
-    border-radius: 50%;
-    animation: floatGlow 18s infinite alternate;
-}
-.glow1 { top: 10%; left: -5%; width: 380px; height: 380px; background: radial-gradient(circle, rgba(212, 175, 55, 0.2), transparent); }
-.glow2 { bottom: 0%; right: -10%; width: 550px; height: 550px; background: radial-gradient(circle, rgba(192, 43, 60, 0.25), transparent); animation-duration: 22s; }
-.glow3 { top: 50%; left: 15%; width: 280px; height: 280px; background: radial-gradient(circle, rgba(212, 175, 55, 0.18), transparent); animation-duration: 14s; }
-@keyframes floatGlow {
-    0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-    100% { transform: translate(45px, 45px) scale(1.4); opacity: 0.7; }
-}
-
 .hero-text-overlay {
     position: relative;
     z-index: 30;
@@ -156,12 +126,6 @@ body::after {
     max-width: 900px;
     width: 90%;
     animation: floatUp 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    background: rgba(5, 1, 4, 0.55);
-    backdrop-filter: blur(12px);
-    border-radius: 70px;
-    padding: 2rem 2rem;
-    border: 1px solid rgba(212, 175, 55, 0.6);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 @keyframes floatUp {
     0% { opacity: 0; transform: translateY(60px) scale(0.94); }
@@ -172,7 +136,7 @@ body::after {
     font-size: 0.9rem;
     letter-spacing: 6px;
     color: #e6c27a;
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.55);
     backdrop-filter: blur(8px);
     display: inline-block;
     padding: 8px 32px;
@@ -189,6 +153,7 @@ body::after {
     background-clip: text;
     color: transparent;
     letter-spacing: 12px;
+    text-shadow: none;
 }
 .name-modern {
     font-family: 'Great Vibes', cursive;
@@ -240,19 +205,19 @@ body::after {
     letter-spacing: 1.5px;
 }
 
-/* Sistema de Mesas Victoriano */
+/* Grid de mesas victoriano - solo visualización */
 .mesas-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 2rem;
     margin: 2rem 0;
 }
 .mesa-card {
-    background: rgba(12, 3, 8, 0.85);
+    background: rgba(12, 3, 8, 0.88);
     backdrop-filter: blur(14px);
     border-radius: 2rem;
     border: 1px solid rgba(192, 43, 60, 0.6);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.2s;
     overflow: hidden;
 }
 .mesa-card:hover {
@@ -278,12 +243,12 @@ body::after {
 }
 .mesa-invitados {
     padding: 1.2rem;
-    min-height: 200px;
+    min-height: 220px;
 }
 .invitado-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     padding: 0.7rem 0.5rem;
     border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
     font-family: 'Inter', sans-serif;
@@ -298,33 +263,40 @@ body::after {
     flex: 1;
     color: #f0e6d2;
 }
-.invitado-confirmado {
-    font-size: 0.7rem;
-    background: rgba(212, 175, 55, 0.2);
-    padding: 2px 8px;
-    border-radius: 30px;
-    color: #d4af37;
-}
 .mesa-footer {
     background: rgba(0,0,0,0.5);
     padding: 0.8rem;
     text-align: center;
     border-top: 1px solid rgba(192, 43, 60, 0.5);
-}
-.btn-confirmar-mesa {
-    background: linear-gradient(95deg, #bc2f3e, #7e1c28);
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 40px;
-    color: #faeec7;
-    font-family: 'Cinzel', serif;
     font-size: 0.8rem;
-    cursor: pointer;
-    transition: 0.2s;
+    color: #d4bc8a;
 }
-.btn-confirmar-mesa:hover {
-    background: linear-gradient(95deg, #d43f4e, #a12230);
-    box-shadow: 0 0 8px rgba(212,175,55,0.5);
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.info-card {
+    background: rgba(12, 3, 8, 0.85);
+    backdrop-filter: blur(14px);
+    border-radius: 2rem;
+    padding: 1.8rem 1rem;
+    text-align: center;
+    border: 1px solid rgba(192, 43, 60, 0.6);
+    transition: all 0.2s;
+}
+.info-card i {
+    font-size: 2.5rem;
+    color: #c92b3e;
+    margin-bottom: 0.8rem;
+}
+.info-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #e9d2a4;
 }
 
 .countdown-modern {
@@ -430,9 +402,10 @@ footer {
 @media (max-width: 768px) {
     .mesas-grid { grid-template-columns: 1fr; }
     .section-modern { padding: 3rem 1rem; }
-    .hero-text-overlay { padding: 1.5rem; }
+    .hero { background-attachment: scroll; }
     .countdown-flex { gap: 1rem; }
     .time-block { padding: 0.5rem 1rem; min-width: 70px; }
+    .info-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -443,17 +416,8 @@ footer {
 <div class="filigrana-esquina esquina-bl"></div>
 <div class="filigrana-esquina esquina-br"></div>
 
-<!-- HERO CON IMAGEN 3.jpg -->
+<!-- HERO CON IMAGEN 3.jpg DE FONDO - LETRAS DIRECTAMENTE SOBRE LA IMAGEN -->
 <section class="hero">
-    <div class="hero-backdrop">
-        <img class="hero-img" src="3.jpg" alt="Victorian Majesty Background" onerror="this.src='https://images.unsplash.com/photo-1516431883659-3e7cb714b9a4?q=80&w=2070&auto=format&fit=crop'">
-        <div class="hero-overlay-gradient"></div>
-    </div>
-    <div class="animated-bg">
-        <div class="glow glow1"></div>
-        <div class="glow glow2"></div>
-        <div class="glow glow3"></div>
-    </div>
     <div class="hero-text-overlay">
         <div class="pre-badge">⚜️ VICTORIAN MAJESTY ⚜️</div>
         <div class="xv-number">XV</div>
@@ -468,21 +432,25 @@ footer {
     <div class="victorian-divider"><i class="fas fa-gem"></i><span class="line"></span><i class="fas fa-feather-alt"></i><span class="line"></span><i class="fas fa-gem"></i></div>
     <h2 class="section-title">El Legado Victoriano</h2>
     <div class="subhead">Amor, tradición y un nuevo comienzo</div>
-    <div class="info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-        <div class="info-card" style="background: rgba(12, 3, 8, 0.85); backdrop-filter: blur(14px); border-radius: 2rem; padding: 1.5rem; text-align: center;"><i class="fas fa-venus-mars"></i><h3>Padres</h3><p><strong>Lucia Méndez Ruvalcaba</strong><br><strong>Ruben Acosta López</strong></p></div>
-        <div class="info-card" style="background: rgba(12, 3, 8, 0.85); backdrop-filter: blur(14px); border-radius: 2rem; padding: 1.5rem; text-align: center;"><i class="fas fa-hand-holding-heart"></i><h3>Padrinos</h3><p><strong>Gema Figueroa Valencia</strong><br><strong>Ricardo Acosta López</strong></p></div>
-        <div class="info-card" style="background: rgba(12, 3, 8, 0.85); backdrop-filter: blur(14px); border-radius: 2rem; padding: 1.5rem; text-align: center;"><i class="fas fa-church"></i><h3>Misa</h3><p><strong>Catedral de Guadalajara</strong><br>5:00 p.m.</p></div>
-        <div class="info-card" style="background: rgba(12, 3, 8, 0.85); backdrop-filter: blur(14px); border-radius: 2rem; padding: 1.5rem; text-align: center;"><i class="fas fa-glass-cheers"></i><h3>Salón</h3><p><strong>Event's salón Jardín</strong><br>Fiesta 7:00 p.m.</p></div>
+    <div class="info-grid">
+        <div class="info-card"><i class="fas fa-venus-mars"></i><h3>Padres</h3><p><strong>Lucia Méndez Ruvalcaba</strong><br><strong>Ruben Acosta López</strong></p></div>
+        <div class="info-card"><i class="fas fa-hand-holding-heart"></i><h3>Padrinos</h3><p><strong>Gema Figueroa Valencia</strong><br><strong>Ricardo Acosta López</strong></p></div>
+        <div class="info-card"><i class="fas fa-church"></i><h3>Misa</h3><p><strong>Catedral de Guadalajara</strong><br>5:00 p.m.</p></div>
+        <div class="info-card"><i class="fas fa-glass-cheers"></i><h3>Salón</h3><p><strong>Event's salón Jardín</strong><br>Fiesta 7:00 p.m.</p></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1rem 0;">
+        <div class="info-card" style="flex:1; min-width: 220px;"><i class="fas fa-tshirt"></i><h3>Código</h3><p><strong>Formal casual</strong><br><span style="color:#e6b87a;">Prohibido: dorado, beige, rojo brillante</span></p></div>
+        <div class="info-card" style="flex:1; min-width: 220px;"><i class="fas fa-envelope-open-text"></i><h3>Lluvia de Sobres</h3><p>🌸 Tradición y bendición<br>✨ Acompaña con tu sobre ✨</p></div>
     </div>
     <div class="victorian-divider"><i class="fas fa-hourglass-half"></i><span class="line"></span><i class="fas fa-star-of-life"></i><span class="line"></span><i class="fas fa-hourglass-half"></i></div>
     <div class="countdown-modern"><div class="countdown-flex"><div class="time-block"><div class="time-number" id="dias">00</div><div class="time-label">Días</div></div><div class="time-block"><div class="time-number" id="horas">00</div><div class="time-label">Horas</div></div><div class="time-block"><div class="time-number" id="minutos">00</div><div class="time-label">Min</div></div><div class="time-block"><div class="time-number" id="segundos">00</div><div class="time-label">Seg</div></div></div></div>
 </section>
 
-<!-- SISTEMA DE 20 MESAS CON INVITADOS -->
+<!-- 20 MESAS CON INVITADOS - SOLO VISUALIZACIÓN, SIN BOTONES -->
 <section class="section-modern">
     <div class="victorian-divider"><i class="fas fa-users"></i><span class="line"></span><i class="fas fa-chair"></i><span class="line"></span><i class="fas fa-crown"></i></div>
     <h2 class="section-title">Mesas de Honor</h2>
-    <div class="subhead">20 mesas · Almas distinguidas · Confirmad vuestra presencia</div>
+    <div class="subhead">20 mesas · Almas distinguidas · Distribución de invitados</div>
     <div id="mesasContainer" class="mesas-grid"></div>
 </section>
 
@@ -513,7 +481,7 @@ footer {
 <div class="music-player"><button id="musicToggle"><i class="fas fa-pause"></i></button><span>Vals Victoriano</span><audio id="bgAudio" loop autoplay><source src="XV_JADE.mp3" type="audio/mpeg"></audio></div>
 
 <script>
-    // DATOS DE 20 MESAS CON INVITADOS (cada mesa con su lista)
+    // DATOS DE 20 MESAS CON INVITADOS (solo visualización)
     const mesasData = [
         { id: 1, nombre: "Mesa Imperial I", invitados: ["Don Fernando Reyes", "Doña Adriana Montes", "Carlos Reyes", "Mariana Reyes", "Luis Fernando Reyes"] },
         { id: 2, nombre: "Mesa Imperial II", invitados: ["Jorge Méndez", "Sofía Méndez", "Diego Valencia", "Valentina Herrera", "Mateo Flores"] },
@@ -537,30 +505,6 @@ footer {
         { id: 20, nombre: "Mesa Eterna", invitados: ["Joaquín Fuentes", "Brenda Fuentes", "Emmanuel Fuentes", "Karen Fuentes", "Óscar Limón"] }
     ];
 
-    // Cargar confirmaciones desde localStorage (por mesa e invitado)
-    let confirmaciones = JSON.parse(localStorage.getItem("confirmaciones_mesas")) || {};
-
-    function guardarConfirmaciones() {
-        localStorage.setItem("confirmaciones_mesas", JSON.stringify(confirmaciones));
-    }
-
-    // Confirmar un invitado específico
-    function confirmarInvitado(mesaId, invitadoNombre) {
-        const key = `${mesaId}_${invitadoNombre}`;
-        if(confirmaciones[key]) {
-            delete confirmaciones[key];
-        } else {
-            confirmaciones[key] = { mesaId, invitado: invitadoNombre, fecha: new Date().toISOString() };
-        }
-        guardarConfirmaciones();
-        renderMesas();
-        // Enviar mensaje elegante a WhatsApp (número fijo de los organizadores)
-        const WHATSAPP_NUMBER = "523322165908";
-        const estado = confirmaciones[key] ? "CONFIRMADA" : "CANCELADA";
-        const mensaje = `🎟️ XV JADE YAMILET - ACTUALIZACIÓN DE MESA 🎟️%0A%0A🏰 Mesa ${mesaId}: ${mesasData.find(m => m.id === mesaId)?.nombre}%0A👤 Invitado: ${invitadoNombre}%0A📌 Estado: ${estado}%0A💫 "Honor a la corte victoriana"%0A%0AConfirmación realizada desde el sistema de mesas.`;
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`, '_blank');
-    }
-
     function renderMesas() {
         const container = document.getElementById('mesasContainer');
         if(!container) return;
@@ -568,19 +512,12 @@ footer {
         mesasData.forEach(mesa => {
             const mesaCard = document.createElement('div');
             mesaCard.className = 'mesa-card';
-            const invitadosHTML = mesa.invitados.map(inv => {
-                const isConfirmed = confirmaciones[`${mesa.id}_${inv}`];
-                return `
-                    <div class="invitado-item">
-                        <i class="fas ${isConfirmed ? 'fa-check-circle' : 'fa-user-circle'}"></i>
-                        <span class="invitado-nombre">${inv}</span>
-                        ${isConfirmed ? '<span class="invitado-confirmado"><i class="fas fa-feather-alt"></i> Confirmado</span>' : ''}
-                        <button class="btn-confirmar-mesa" data-mesa="${mesa.id}" data-invitado="${inv}" style="margin-left:auto; padding:0.3rem 0.8rem; font-size:0.7rem;">
-                            ${isConfirmed ? '<i class="fas fa-times"></i> Cancelar' : '<i class="fas fa-check"></i> Confirmar'}
-                        </button>
-                    </div>
-                `;
-            }).join('');
+            const invitadosHTML = mesa.invitados.map(inv => `
+                <div class="invitado-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="invitado-nombre">${inv}</span>
+                </div>
+            `).join('');
             mesaCard.innerHTML = `
                 <div class="mesa-header">
                     <h3><i class="fas fa-crown"></i> ${mesa.nombre}</h3>
@@ -595,15 +532,6 @@ footer {
             `;
             container.appendChild(mesaCard);
         });
-        // Agregar event listeners dinámicos
-        document.querySelectorAll('.btn-confirmar-mesa').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const mesaId = parseInt(btn.getAttribute('data-mesa'));
-                const invitado = btn.getAttribute('data-invitado');
-                confirmarInvitado(mesaId, invitado);
-            });
-        });
     }
 
     // Countdown
@@ -616,9 +544,15 @@ footer {
             document.getElementById("horas").innerText = Math.floor((diff % 86400000) / 3600000);
             document.getElementById("minutos").innerText = Math.floor((diff % 3600000) / 60000);
             document.getElementById("segundos").innerText = Math.floor((diff % 60000) / 1000);
+        } else {
+            document.getElementById("dias").innerText = "00";
+            document.getElementById("horas").innerText = "00";
+            document.getElementById("minutos").innerText = "00";
+            document.getElementById("segundos").innerText = "00";
         }
     }
-    setInterval(updateTimer, 1000); updateTimer();
+    setInterval(updateTimer, 1000);
+    updateTimer();
 
     // Música
     const audio = document.getElementById('bgAudio');
