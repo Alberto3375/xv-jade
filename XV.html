@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-<title>XV Jade Yamilet · Mesas de Honor · 20 Enlaces Únicos</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;300;400;500;600&family=Cinzel:wght@400;500;600;700;800;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<title>XV Jade Yamilet · Victorian Majesty · Mesa Imperial I</title>
+<!-- Google Fonts: Victoriano y Elegante -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400;14..32,500;14..32,600&family=Cinzel:wght@400;500;600;700;800;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <!-- Font Awesome 6 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
@@ -14,12 +14,16 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: 'Inter', sans-serif;
     background: #0a0104;
     color: #f0ebe3;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
+
+/* Fondo victoriano dramático para el resto de la página */
 body::before {
     content: "";
     position: fixed;
@@ -27,11 +31,12 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 30% 20%, rgba(100,15,25,0.5), rgba(5,1,3,0.98)),
-                repeating-linear-gradient(45deg, rgba(212,175,55,0.04) 0px, rgba(212,175,55,0.04) 2px, transparent 2px, transparent 12px);
+    background: radial-gradient(circle at 30% 20%, rgba(100, 15, 25, 0.5), rgba(5, 1, 3, 0.98)),
+                repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.04) 0px, rgba(212, 175, 55, 0.04) 2px, transparent 2px, transparent 12px);
     pointer-events: none;
     z-index: -2;
 }
+
 body::after {
     content: "";
     position: fixed;
@@ -42,11 +47,20 @@ body::after {
     backdrop-filter: blur(0.8px);
     z-index: -1;
 }
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #1a050b; }
-::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #c92b3e, #9e2a2a); border-radius: 20px; }
 
-/* Ornamentos */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1a050b;
+    border-left: 1px solid #2e0c14;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #c92b3e, #9e2a2a);
+    border-radius: 20px;
+}
+
+/* Ornamentos victorianos */
 .filigrana-esquina {
     position: fixed;
     width: 110px;
@@ -76,118 +90,319 @@ body::after {
     background: linear-gradient(90deg, transparent, #c92b3e, #d4af37, #c92b3e, transparent);
     width: 140px;
 }
-.victorian-divider i { color: #c92b3e; font-size: 1.5rem; text-shadow: 0 0 5px #d4af37; }
-
-/* Header */
-.header-mini {
-    background: rgba(5,1,4,0.85);
-    backdrop-filter: blur(12px);
-    padding: 1rem 2rem;
-    text-align: center;
-    border-bottom: 1px solid #c92b3e;
-}
-.header-mini h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2rem;
-    color: #e6c27a;
-}
-.header-mini p {
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+.victorian-divider i {
+    color: #c92b3e;
+    font-size: 1.5rem;
+    text-shadow: 0 0 5px #d4af37;
 }
 
-/* Contenedor de enlaces - 20 links a mesas */
-.links-container {
-    max-width: 1300px;
-    margin: 3rem auto;
+/* Hero con imagen 3.jpg de fondo REAL desde la misma carpeta */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     padding: 2rem;
+    isolation: isolate;
+    /* IMAGEN REAL DESDE LA MISMA CARPETA */
+    background-image: url('3.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+/* Overlay oscuro para mejorar legibilidad del texto, directamente sobre la imagen */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(10,1,4,0.7) 100%);
+    z-index: 1;
+}
+.hero-text-overlay {
+    position: relative;
+    z-index: 30;
+    text-align: center;
+    max-width: 900px;
+    width: 90%;
+    animation: floatUp 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+@keyframes floatUp {
+    0% { opacity: 0; transform: translateY(60px) scale(0.94); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.pre-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 6px;
+    color: #e6c27a;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+    display: inline-block;
+    padding: 8px 32px;
+    border-radius: 60px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #c92b3e;
+}
+.xv-number {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(5rem, 18vw, 12rem);
+    font-weight: 900;
+    background: linear-gradient(145deg, #f7e8bc, #d4af37, #b57c2c, #b02b3a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 12px;
+    text-shadow: none;
+}
+.name-modern {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: #fff6ea;
+    text-shadow: 0 4px 25px #6b0f1a, 0 0 10px #d4af37;
+    margin: 0.6rem 0;
+}
+.date-modern {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    letter-spacing: 3px;
+    border-top: 1px solid rgba(212, 175, 55, 0.9);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.9);
+    display: inline-block;
+    padding: 12px 32px;
+    margin-top: 1rem;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 60px;
+    font-size: 1.1rem;
+}
+
+.section-modern {
+    padding: 5rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
 }
 .section-title {
     font-family: 'Cinzel', serif;
-    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-size: clamp(2rem, 5vw, 3rem);
     text-align: center;
+    font-weight: 700;
     background: linear-gradient(135deg, #f3e2bc, #d4af37, #b02b3a);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     margin-bottom: 0.5rem;
+    letter-spacing: 2px;
 }
 .subhead {
     text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
     color: #d4bc8a;
     margin-bottom: 2.5rem;
     letter-spacing: 1.5px;
 }
-.mesas-links-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.8rem;
-}
-.link-mesa-card {
-    background: rgba(12, 3, 8, 0.85);
+
+/* Tarjeta de mesa - una sola mesa */
+.mesa-unica {
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(12, 3, 8, 0.88);
     backdrop-filter: blur(14px);
     border-radius: 2rem;
     border: 1px solid rgba(192, 43, 60, 0.6);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: block;
     overflow: hidden;
+    transition: transform 0.3s ease;
 }
-.link-mesa-card:hover {
+.mesa-unica:hover {
     transform: translateY(-6px);
     border-color: #d4af37;
     box-shadow: 0 20px 35px rgba(0,0,0,0.5);
 }
-.link-mesa-header {
+.mesa-header {
     background: linear-gradient(135deg, #1e0a12, #0d0307);
-    padding: 1.2rem;
+    padding: 1.5rem;
     text-align: center;
     border-bottom: 2px solid #c92b3e;
 }
-.link-mesa-header h3 {
+.mesa-header h3 {
     font-family: 'Cinzel', serif;
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     color: #e9d2a4;
+    letter-spacing: 2px;
 }
-.link-mesa-header i {
+.mesa-header i {
     color: #d4af37;
-    margin-right: 8px;
+    margin-right: 10px;
 }
-.link-mesa-body {
+.mesa-invitados {
+    padding: 1.5rem;
+}
+.invitado-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0.9rem 0.8rem;
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+}
+.invitado-item i {
+    color: #c92b3e;
+    width: 28px;
+    font-size: 1.1rem;
+}
+.invitado-nombre {
+    flex: 1;
+    color: #f0e6d2;
+    font-weight: 400;
+}
+.mesa-footer {
+    background: rgba(0,0,0,0.5);
     padding: 1rem;
     text-align: center;
-    color: #e6d5b3;
-}
-.link-mesa-body p {
+    border-top: 1px solid rgba(192, 43, 60, 0.5);
     font-size: 0.9rem;
-}
-.btn-link-mesa {
-    display: inline-block;
-    margin: 1rem auto 1.2rem;
-    background: linear-gradient(95deg, #bc2f3e, #7e1c28);
-    padding: 0.5rem 1.5rem;
-    border-radius: 40px;
-    color: #faeec7;
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    transition: 0.2s;
-}
-.link-mesa-card:hover .btn-link-mesa {
-    background: linear-gradient(95deg, #d43f4e, #a12230);
-    box-shadow: 0 0 8px rgba(212,175,55,0.5);
+    color: #d4bc8a;
 }
 
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.info-card {
+    background: rgba(12, 3, 8, 0.85);
+    backdrop-filter: blur(14px);
+    border-radius: 2rem;
+    padding: 1.8rem 1rem;
+    text-align: center;
+    border: 1px solid rgba(192, 43, 60, 0.6);
+    transition: all 0.2s;
+}
+.info-card i {
+    font-size: 2.5rem;
+    color: #c92b3e;
+    margin-bottom: 0.8rem;
+}
+.info-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #e9d2a4;
+}
+
+.countdown-modern {
+    background: rgba(10, 2, 5, 0.75);
+    backdrop-filter: blur(20px);
+    border-radius: 80px;
+    padding: 2rem 1rem;
+    margin: 2rem 0;
+    border: 1px solid rgba(192, 43, 60, 0.8);
+}
+.countdown-flex {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.time-block {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 2rem;
+    padding: 0.8rem 1.8rem;
+    min-width: 100px;
+    text-align: center;
+    border-bottom: 4px solid #c92b3e;
+}
+.time-number {
+    font-family: 'Cinzel', monospace;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    color: #e6c27a;
+}
+.time-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #d4af37;
+}
+
+.map-container {
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 1px solid rgba(192, 43, 60, 0.8);
+    margin: 2rem 0;
+    box-shadow: 0 20px 30px -10px black;
+}
+.map-container iframe {
+    width: 100%;
+    height: 400px;
+    display: block;
+}
+
+.btn-regalo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #0f0308;
+    border: 1.5px solid #bc2f3e;
+    padding: 0.9rem 2.5rem;
+    border-radius: 60px;
+    color: #e2bc7c;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    transition: 0.2s;
+    font-size: 1.1rem;
+}
+.btn-regalo:hover {
+    border-color: #d4af37;
+    background: #1c0810;
+    transform: scale(1.02);
+}
+
+.music-player {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: rgba(10, 3, 6, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 0.6rem 1.4rem;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #c92b3e;
+    z-index: 1100;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.6);
+}
+.music-player button {
+    background: #bc2f3e;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #0a0104;
+    font-size: 1.2rem;
+}
 footer {
     text-align: center;
-    padding: 2rem;
+    padding: 3rem;
     background: rgba(0,0,0,0.85);
-    border-top: 1px solid #bc2f3e;
+    border-top: 2px solid #bc2f3e;
     margin-top: 2rem;
 }
 @media (max-width: 768px) {
-    .mesas-links-grid { grid-template-columns: 1fr; }
-    .links-container { padding: 1rem; }
+    .section-modern { padding: 3rem 1rem; }
+    .hero { background-attachment: scroll; }
+    .countdown-flex { gap: 1rem; }
+    .time-block { padding: 0.5rem 1rem; min-width: 70px; }
+    .info-grid { grid-template-columns: 1fr; }
+    .mesa-header h3 { font-size: 1.6rem; }
 }
 </style>
 </head>
@@ -198,288 +413,136 @@ footer {
 <div class="filigrana-esquina esquina-bl"></div>
 <div class="filigrana-esquina esquina-br"></div>
 
-<div class="header-mini">
-    <h1>XV Jade Yamilet</h1>
-    <p>⚜️ Victorian Majesty · Sangre & Oro ⚜️</p>
-</div>
+<!-- HERO CON IMAGEN 3.jpg DE FONDO REAL -->
+<section class="hero">
+    <div class="hero-text-overlay">
+        <div class="pre-badge">⚜️ VICTORIAN MAJESTY ⚜️</div>
+        <div class="xv-number">XV</div>
+        <div class="name-modern">Jade Yamilet</div>
+        <div class="date-modern">VEINTICUATRO DE MAYO · MMXXVI · 5:00 P.M.</div>
+        <div class="victorian-divider" style="margin-top: 1.2rem;"><span class="line"></span><i class="fas fa-crown"></i><span class="line"></span></div>
+    </div>
+</section>
 
-<div class="links-container">
-    <div class="victorian-divider"><i class="fas fa-crown"></i><span class="line"></span><i class="fas fa-chair"></i><span class="line"></span><i class="fas fa-crown"></i></div>
-    <h2 class="section-title">20 Mesas de Honor</h2>
-    <div class="subhead">Cada enlace lleva a la invitación personalizada de cada mesa con sus invitados</div>
-    <div id="mesasLinksGrid" class="mesas-links-grid"></div>
-</div>
+<!-- INFORMACIÓN PRINCIPAL -->
+<section class="section-modern">
+    <div class="victorian-divider"><i class="fas fa-gem"></i><span class="line"></span><i class="fas fa-feather-alt"></i><span class="line"></span><i class="fas fa-gem"></i></div>
+    <h2 class="section-title">El Legado Victoriano</h2>
+    <div class="subhead">Amor, tradición y un nuevo comienzo</div>
+    <div class="info-grid">
+        <div class="info-card"><i class="fas fa-venus-mars"></i><h3>Padres</h3><p><strong>Lucia Méndez Ruvalcaba</strong><br><strong>Ruben Acosta López</strong></p></div>
+        <div class="info-card"><i class="fas fa-hand-holding-heart"></i><h3>Padrinos</h3><p><strong>Gema Figueroa Valencia</strong><br><strong>Ricardo Acosta López</strong></p></div>
+        <div class="info-card"><i class="fas fa-church"></i><h3>Misa</h3><p><strong>Catedral de Guadalajara</strong><br>5:00 p.m.</p></div>
+        <div class="info-card"><i class="fas fa-glass-cheers"></i><h3>Salón</h3><p><strong>Event's salón Jardín</strong><br>Fiesta 7:00 p.m.</p></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1rem 0;">
+        <div class="info-card" style="flex:1; min-width: 220px;"><i class="fas fa-tshirt"></i><h3>Código</h3><p><strong>Formal casual</strong><br><span style="color:#e6b87a;">Prohibido: dorado, beige, rojo brillante</span></p></div>
+        <div class="info-card" style="flex:1; min-width: 220px;"><i class="fas fa-envelope-open-text"></i><h3>Lluvia de Sobres</h3><p>🌸 Tradición y bendición<br>✨ Acompaña con tu sobre ✨</p></div>
+    </div>
+    <div class="victorian-divider"><i class="fas fa-hourglass-half"></i><span class="line"></span><i class="fas fa-star-of-life"></i><span class="line"></span><i class="fas fa-hourglass-half"></i></div>
+    <div class="countdown-modern"><div class="countdown-flex"><div class="time-block"><div class="time-number" id="dias">00</div><div class="time-label">Días</div></div><div class="time-block"><div class="time-number" id="horas">00</div><div class="time-label">Horas</div></div><div class="time-block"><div class="time-number" id="minutos">00</div><div class="time-label">Min</div></div><div class="time-block"><div class="time-number" id="segundos">00</div><div class="time-label">Seg</div></div></div></div>
+</section>
 
-<footer>
-    <div class="victorian-divider"><i class="fas fa-heart"></i><span class="line"></span><i class="fas fa-gem"></i><span class="line"></span><i class="fas fa-heart"></i></div>
-    <p>24 de Mayo 2026 · Catedral 5:00 p.m. · Salón Jardín 7:00 p.m.</p>
-    <p style="font-family: 'Great Vibes', cursive; font-size: 1.4rem;">"La elegancia nunca pasa de moda"</p>
-</footer>
-
-<script>
-    // DATOS DE 20 MESAS CON SUS INVITADOS (cada mesa tiene su lista única)
-    const mesasData = [
-        { id: 1, nombre: "Mesa Imperial I", invitados: ["Don Fernando Reyes", "Doña Adriana Montes", "Carlos Reyes", "Mariana Reyes", "Luis Fernando Reyes"] },
-        { id: 2, nombre: "Mesa Imperial II", invitados: ["Jorge Méndez", "Sofía Méndez", "Diego Valencia", "Valentina Herrera", "Mateo Flores"] },
-        { id: 3, nombre: "Mesa del Rubí", invitados: ["Raúl Acosta", "Patricia López", "Mónica Acosta", "Andrés Acosta", "Camila Ruiz"] },
-        { id: 4, nombre: "Mesa del Zafiro", invitados: ["Guillermo Figueroa", "Laura Valencia", "Emilio Figueroa", "Renata Figueroa", "Pablo Ortiz"] },
-        { id: 5, nombre: "Mesa Esmeralda", invitados: ["Alberto Castro", "Maribel Castro", "Daniel Castro", "Samantha Castro", "Rodrigo Nava"] },
-        { id: 6, nombre: "Mesa Diamante", invitados: ["Óscar Ríos", "Carmen Ríos", "Julieta Ríos", "Federico Ríos", "Ana Laura Gil"] },
-        { id: 7, nombre: "Mesa Dorada", invitados: ["Héctor Vega", "Rocío Vega", "Iván Vega", "Diana Vega", "Mario Suárez"] },
-        { id: 8, nombre: "Mesa Carmesí", invitados: ["Arturo Pineda", "Verónica Pineda", "Lorena Pineda", "Javier Pineda", "Karla Morales"] },
-        { id: 9, nombre: "Mesa Escarlata", invitados: ["Gabriel Torres", "Elena Torres", "Nicolás Torres", "Jimena Torres", "Fernando Castillo"] },
-        { id: 10, nombre: "Mesa de Ébano", invitados: ["Ricardo Rosas", "Claudia Rosas", "Adrián Rosas", "Valeria Rosas", "Esteban López"] },
-        { id: 11, nombre: "Mesa Alba Real", invitados: ["Tomás Gálvez", "Paulina Gálvez", "Sebastián Gálvez", "Regina Gálvez", "Hugo Sandoval"] },
-        { id: 12, nombre: "Mesa Rosa Noble", invitados: ["Eduardo Herrera", "Natalia Herrera", "Ximena Herrera", "Leonardo Herrera", "Martha Lira"] },
-        { id: 13, nombre: "Mesa Aurora", invitados: ["Manuel Serrano", "Andrea Serrano", "Cristian Serrano", "Daniela Serrano", "Jesús Rangel"] },
-        { id: 14, nombre: "Mesa Crepúsculo", invitados: ["Roberto Franco", "Silvia Franco", "Gerardo Franco", "Paulina Franco", "Julio César Díaz"] },
-        { id: 15, nombre: "Mesa Victoria", invitados: ["Luis Ángel Soto", "Carolina Soto", "Kevin Soto", "Alejandra Soto", "Monserrat García"] },
-        { id: 16, nombre: "Mesa Regia", invitados: ["Alonso Delgado", "Fabiola Delgado", "Bruno Delgado", "Camila Delgado", "Sergio Aguilar"] },
-        { id: 17, nombre: "Mesa Príncipe", invitados: ["Francisco Olvera", "Marisol Olvera", "Derek Olvera", "Kiara Olvera", "Iker Mendoza"] },
-        { id: 18, nombre: "Mesa Palatina", invitados: ["César Cabrera", "Margarita Cabrera", "Humberto Cabrera", "Liliana Cabrera", "Alan Zamora"] },
-        { id: 19, nombre: "Mesa de los Espejos", invitados: ["Mauricio Vega", "Dulce Vega", "Saúl Vega", "Mireya Vega", "Bruno Rocha"] },
-        { id: 20, nombre: "Mesa Eterna", invitados: ["Joaquín Fuentes", "Brenda Fuentes", "Emmanuel Fuentes", "Karen Fuentes", "Óscar Limón"] }
-    ];
-
-    // Función para generar el HTML de cada invitación de mesa (página individual)
-    function generarPaginaMesa(mesa) {
-        const invitadosListHTML = mesa.invitados.map(nombre => `
+<!-- UNA SOLA MESA: MESA IMPERIAL I -->
+<section class="section-modern">
+    <div class="victorian-divider"><i class="fas fa-users"></i><span class="line"></span><i class="fas fa-chair"></i><span class="line"></span><i class="fas fa-crown"></i></div>
+    <h2 class="section-title">Mesa de Honor</h2>
+    <div class="subhead">Invitados distinguidos · Mesa Imperial I</div>
+    
+    <div class="mesa-unica">
+        <div class="mesa-header">
+            <h3><i class="fas fa-crown"></i> Mesa Imperial I</h3>
+            <small style="color:#d4af37;">Mesa N° 1</small>
+        </div>
+        <div class="mesa-invitados">
             <div class="invitado-item">
                 <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">${nombre}</span>
+                <span class="invitado-nombre">Don Fernando Reyes</span>
             </div>
-        `).join('');
-        
-        return `<!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-            <title>XV Jade Yamilet · ${mesa.nombre}</title>
-            <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;300;400;500;600&family=Cinzel:wght@400;500;600;700;800;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-            <style>
-                * { margin: 0; padding: 0; box-sizing: border-box; }
-                body {
-                    font-family: 'Inter', sans-serif;
-                    background: #0a0104;
-                    color: #f0ebe3;
-                    min-height: 100vh;
-                }
-                body::before {
-                    content: "";
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: radial-gradient(circle at 30% 20%, rgba(100,15,25,0.5), rgba(5,1,3,0.98)),
-                                repeating-linear-gradient(45deg, rgba(212,175,55,0.04) 0px, rgba(212,175,55,0.04) 2px, transparent 2px, transparent 12px);
-                    pointer-events: none;
-                    z-index: -2;
-                }
-                body::after {
-                    content: "";
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    backdrop-filter: blur(0.8px);
-                    z-index: -1;
-                }
-                .hero-invitacion {
-                    min-height: 100vh;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    position: relative;
-                    padding: 2rem;
-                    background-image: url('3.jpg');
-                    background-size: cover;
-                    background-position: center;
-                    background-attachment: fixed;
-                }
-                .hero-invitacion::before {
-                    content: "";
-                    position: absolute;
-                    inset: 0;
-                    background: radial-gradient(circle at center, rgba(0,0,0,0.4), rgba(10,1,4,0.8));
-                    z-index: 1;
-                }
-                .invitacion-card {
-                    position: relative;
-                    z-index: 30;
-                    max-width: 800px;
-                    width: 90%;
-                    background: rgba(5, 1, 4, 0.75);
-                    backdrop-filter: blur(16px);
-                    border-radius: 60px;
-                    padding: 2.5rem;
-                    border: 1px solid rgba(212, 175, 55, 0.6);
-                    box-shadow: 0 25px 45px rgba(0,0,0,0.6);
-                    animation: fadeIn 1s ease;
-                }
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(30px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .pre-badge {
-                    font-family: 'Cinzel', serif;
-                    font-size: 0.8rem;
-                    letter-spacing: 4px;
-                    color: #e6c27a;
-                    background: rgba(0,0,0,0.5);
-                    display: inline-block;
-                    padding: 6px 20px;
-                    border-radius: 40px;
-                    margin-bottom: 1rem;
-                    border: 1px solid #c92b3e;
-                }
-                .xv-number-small {
-                    font-family: 'Cinzel', serif;
-                    font-size: 3rem;
-                    font-weight: 800;
-                    background: linear-gradient(145deg, #f7e8bc, #d4af37, #b57c2c);
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    color: transparent;
-                }
-                .nombre-titular {
-                    font-family: 'Great Vibes', cursive;
-                    font-size: 3rem;
-                    color: #fff6ea;
-                    text-shadow: 0 2px 15px #6b0f1a;
-                    margin: 0.5rem 0;
-                }
-                .mesa-nombre {
-                    font-family: 'Cinzel', serif;
-                    font-size: 2rem;
-                    color: #d4af37;
-                    margin: 1rem 0;
-                    border-top: 1px solid #c92b3e;
-                    border-bottom: 1px solid #c92b3e;
-                    display: inline-block;
-                    padding: 0.5rem 1rem;
-                }
-                .invitados-lista {
-                    margin: 2rem 0;
-                    text-align: left;
-                    background: rgba(0,0,0,0.4);
-                    border-radius: 2rem;
-                    padding: 1.5rem;
-                }
-                .invitados-lista h3 {
-                    font-family: 'Cinzel', serif;
-                    color: #e9d2a4;
-                    margin-bottom: 1rem;
-                    text-align: center;
-                }
-                .invitado-item {
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    padding: 0.7rem 0.5rem;
-                    border-bottom: 1px dashed rgba(212,175,55,0.3);
-                    font-size: 1rem;
-                }
-                .invitado-item i { color: #c92b3e; width: 28px; }
-                .invitado-nombre { flex: 1; color: #f0e6d2; }
-                .fecha-info {
-                    text-align: center;
-                    margin: 1.5rem 0;
-                    font-family: 'Cinzel', serif;
-                    color: #d4bc8a;
-                }
-                .btn-volver {
-                    background: linear-gradient(95deg, #bc2f3e, #7e1c28);
-                    border: none;
-                    padding: 0.8rem 2rem;
-                    border-radius: 60px;
-                    color: #faeec7;
-                    font-family: 'Cinzel', serif;
-                    cursor: pointer;
-                    text-decoration: none;
-                    display: inline-block;
-                    margin-top: 1rem;
-                }
-                .victorian-divider-sm {
-                    display: flex;
-                    justify-content: center;
-                    gap: 1rem;
-                    margin: 1rem 0;
-                }
-                .victorian-divider-sm .line { width: 60px; height: 1px; background: #c92b3e; margin: auto; }
-                @media (max-width: 768px) {
-                    .invitacion-card { padding: 1.5rem; }
-                    .nombre-titular { font-size: 2rem; }
-                    .mesa-nombre { font-size: 1.4rem; }
-                }
-            </style>
-        </head>
-        <body>
-            <div class="hero-invitacion">
-                <div class="invitacion-card">
-                    <div style="text-align:center;">
-                        <div class="pre-badge">⚜️ VICTORIAN MAJESTY ⚜️</div>
-                        <div class="xv-number-small">XV</div>
-                        <div class="nombre-titular">Jade Yamilet</div>
-                        <div class="victorian-divider-sm"><span class="line"></span><i class="fas fa-crown" style="color:#d4af37;"></i><span class="line"></span></div>
-                        <div class="mesa-nombre"><i class="fas fa-chair"></i> ${mesa.nombre}</div>
-                        <div class="invitados-lista">
-                            <h3><i class="fas fa-users"></i> Invitados de Honor</h3>
-                            ${invitadosListHTML}
-                        </div>
-                        <div class="fecha-info">
-                            <i class="fas fa-calendar-alt"></i> 24 de Mayo 2026 · 5:00 P.M.<br>
-                            <i class="fas fa-church"></i> Catedral de Guadalajara · <i class="fas fa-glass-cheers"></i> Event's Salón Jardín
-                        </div>
-                        <a href="index.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver a las Mesas</a>
-                    </div>
-                </div>
+            <div class="invitado-item">
+                <i class="fas fa-user-circle"></i>
+                <span class="invitado-nombre">Doña Adriana Montes</span>
             </div>
-        </body>
-        </html>`;
-    }
+            <div class="invitado-item">
+                <i class="fas fa-user-circle"></i>
+                <span class="invitado-nombre">Carlos Reyes</span>
+            </div>
+            <div class="invitado-item">
+                <i class="fas fa-user-circle"></i>
+                <span class="invitado-nombre">Mariana Reyes</span>
+            </div>
+            <div class="invitado-item">
+                <i class="fas fa-user-circle"></i>
+                <span class="invitado-nombre">Luis Fernando Reyes</span>
+            </div>
+        </div>
+        <div class="mesa-footer">
+            <i class="fas fa-wine-glass-alt"></i> Cupo: 5 comensales
+        </div>
+    </div>
+</section>
 
-    // Generar todos los enlaces en la página principal
-    function generarLinksDeMesas() {
-        const gridContainer = document.getElementById('mesasLinksGrid');
-        if (!gridContainer) return;
-        
-        gridContainer.innerHTML = '';
-        mesasData.forEach(mesa => {
-            const card = document.createElement('div');
-            card.className = 'link-mesa-card';
-            // Creamos un identificador único para cada página de mesa (se guardará en localStorage o se abrirá en nueva pestaña)
-            // Para este sistema, generamos un blob URL o simplemente usamos javascript: para crear una nueva ventana con el contenido.
-            // La mejor experiencia: al hacer clic, se abre una nueva pestaña con la invitación generada dinámicamente.
-            card.innerHTML = `
-                <div class="link-mesa-header">
-                    <h3><i class="fas fa-crown"></i> ${mesa.nombre}</h3>
-                    <small style="color:#d4af37;">Mesa N° ${mesa.id}</small>
-                </div>
-                <div class="link-mesa-body">
-                    <p><i class="fas fa-user-friends"></i> ${mesa.invitados.length} invitados</p>
-                    <div class="btn-link-mesa"><i class="fas fa-envelope-open-text"></i> Ver invitación completa</div>
-                </div>
-            `;
-            card.addEventListener('click', (e) => {
-                e.preventDefault();
-                // Generar la página HTML de la mesa
-                const paginaHTML = generarPaginaMesa(mesa);
-                // Crear un blob y abrir en nueva pestaña
-                const blob = new Blob([paginaHTML], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                window.open(url, '_blank');
-                // Liberar URL después de un tiempo
-                setTimeout(() => URL.revokeObjectURL(url), 1000);
-            });
-            gridContainer.appendChild(card);
-        });
-    }
+<!-- MAPA -->
+<section class="section-modern">
+    <div class="victorian-divider"><i class="fas fa-map-marker-alt"></i><span class="line"></span><i class="fas fa-location-dot"></i><span class="line"></span><i class="fas fa-map-marker-alt"></i></div>
+    <h2 class="section-title">Salón de Gala</h2>
+    <div class="subhead">Event's Salón Jardín · Guadalajara</div>
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3733.877542087836!2d-103.2696644!3d20.6338477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428b3e7f75c2e97%3A0x6feb2b0530e57a89!2zRXZlbnQgU2Fsw7NuIEphcmRDrW4!5e0!3m2!1ses!2smx!4v1775666013018!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</section>
 
-    generarLinksDeMesas();
+<!-- REGALOS -->
+<section class="section-modern" style="text-align:center;">
+    <div class="victorian-divider"><i class="fas fa-gift"></i><span class="line"></span><i class="fas fa-diamond"></i><span class="line"></span><i class="fas fa-gift"></i></div>
+    <h2 class="section-title">Tesoros & Deseos</h2>
+    <div class="subhead">Un detalle para honrar este legado</div>
+    <a href="https://api-shein.shein.com/h5/sharejump/appjump?link=l08IUia8KTT_9_1&localcountry=MX&shc=2_l08IUia8KTT_9_1" target="_blank" class="btn-regalo btn-sheen"><i class="fab fa-shein"></i> Lista SHEIN</a>
+</section>
+
+<footer>
+    <div class="victorian-divider"><i class="fas fa-crown"></i><span class="line"></span><i class="fas fa-heart"></i><span class="line"></span><i class="fas fa-crown"></i></div>
+    <p style="font-family: 'Great Vibes', cursive; font-size: 2rem;">"La elegancia nunca pasa de moda"</p>
+    <p>24 de Mayo 2026 · Catedral 5:00 p.m. · Salón Jardín 7:00 p.m.</p>
+</footer>
+
+<div class="music-player"><button id="musicToggle"><i class="fas fa-pause"></i></button><span>Vals Victoriano</span><audio id="bgAudio" loop autoplay><source src="XV_JADE.mp3" type="audio/mpeg"></audio></div>
+
+<script>
+    // Countdown
+    function updateTimer() {
+        const target = new Date("May 24, 2026 19:00:00").getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+        if(diff > 0) {
+            document.getElementById("dias").innerText = Math.floor(diff / 86400000);
+            document.getElementById("horas").innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById("minutos").innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById("segundos").innerText = Math.floor((diff % 60000) / 1000);
+        } else {
+            document.getElementById("dias").innerText = "00";
+            document.getElementById("horas").innerText = "00";
+            document.getElementById("minutos").innerText = "00";
+            document.getElementById("segundos").innerText = "00";
+        }
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // Música
+    const audio = document.getElementById('bgAudio');
+    const musicBtn = document.getElementById('musicToggle');
+    let playing = true;
+    if(audio) {
+        audio.volume = 0.25;
+        audio.play().catch(() => { playing = false; if(musicBtn) musicBtn.innerHTML = '<i class="fas fa-play"></i>'; });
+        if(musicBtn) {
+            musicBtn.onclick = () => {
+                if(playing) { audio.pause(); playing = false; musicBtn.innerHTML = '<i class="fas fa-play"></i>'; }
+                else { audio.play(); playing = true; musicBtn.innerHTML = '<i class="fas fa-pause"></i>'; }
+            };
+        }
+    }
 </script>
 </body>
 </html>
