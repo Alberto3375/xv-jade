@@ -404,6 +404,41 @@ footer {
     .info-grid { grid-template-columns: 1fr; }
     .mesa-header h3 { font-size: 1.6rem; }
 }
+.mesa-invitados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.invitado-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.invitado-item:hover {
+    transform: scale(1.03);
+    background: rgba(212, 175, 55, 0.15);
+}
+
+.separador {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #d4af37;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    font-size: 14px;
+}
+
+.mesa-header small {
+    color: #d4af37;
+}
 </style>
 </head>
 <body>
@@ -443,64 +478,42 @@ footer {
     <div class="countdown-modern"><div class="countdown-flex"><div class="time-block"><div class="time-number" id="dias">00</div><div class="time-label">Días</div></div><div class="time-block"><div class="time-number" id="horas">00</div><div class="time-label">Horas</div></div><div class="time-block"><div class="time-number" id="minutos">00</div><div class="time-label">Min</div></div><div class="time-block"><div class="time-number" id="segundos">00</div><div class="time-label">Seg</div></div></div></div>
 </section>
 
-<!-- UNA SOLA MESA: MESA IMPERIAL I -->
 <section class="section-modern">
-    <div class="victorian-divider"><i class="fas fa-users"></i><span class="line"></span><i class="fas fa-chair"></i><span class="line"></span><i class="fas fa-crown"></i></div>
+    <div class="victorian-divider">
+        <i class="fas fa-users"></i><span class="line"></span>
+        <i class="fas fa-chair"></i><span class="line"></span>
+        <i class="fas fa-crown"></i>
+    </div>
+
     <h2 class="section-title">Mesa de Honor</h2>
     <div class="subhead">Invitados distinguidos · Mesa Imperial I</div>
     
     <div class="mesa-unica">
         <div class="mesa-header">
             <h3><i class="fas fa-crown"></i> Mesa Imperial I</h3>
-            <small style="color:#d4af37;">Mesa N° 1</small>
+            <small>Mesa N° 1</small>
         </div>
+
         <div class="mesa-invitados">
-            <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Teresa Ruvalcaba Ortiz</span>
-            </div>
-            <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Adriana Elizabeth Méndez</span>
-            </div>
-            <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Francisco Javier Méndez</span>
-            </div>
-            <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Maria del Carmen Ruvalcaba Ortiz</span>
-            </div>
-            <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Laura Elena Solis Ruvalcaba</span>
-            </div>
-               <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Yosef Yael Acosta Méndez</span>
-            </div>
-               <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Andrea Jacqueline Avalos Maravilla</span>
-            </div>
-               <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Lourdes Rebeca Miramontes</span>
-            </div>
-               <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Gabriel Ramirez Enciso</span>
-            </div>
-               <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Jonathan Morua EStrada</span>
-            </div>
-                        <small style="color:#d4af37;">Niños</small>
- <div class="invitado-item">
-                <i class="fas fa-user-circle"></i>
-                <span class="invitado-nombre">Leonardo Méndez Bermudes</span>
-            </div>
+            <!-- Adultos -->
+            <div class="invitado-item">Teresa Ruvalcaba Ortiz</div>
+            <div class="invitado-item">Adriana Elizabeth Méndez</div>
+            <div class="invitado-item">Francisco Javier Méndez</div>
+            <div class="invitado-item">Maria del Carmen Ruvalcaba Ortiz</div>
+            <div class="invitado-item">Laura Elena Solis Ruvalcaba</div>
+            <div class="invitado-item">Yosef Yael Acosta Méndez</div>
+            <div class="invitado-item">Andrea Jacqueline Avalos Maravilla</div>
+            <div class="invitado-item">Lourdes Rebeca Miramontes</div>
+            <div class="invitado-item">Gabriel Ramirez Enciso</div>
+            <div class="invitado-item">Jonathan Morua Estrada</div>
+
+            <!-- Separador -->
+            <div class="separador">Niños</div>
+
+            <!-- Niños -->
+            <div class="invitado-item">Leonardo Méndez Bermudez</div>
         </div>
+
         <div class="mesa-footer">
             <i class="fas fa-wine-glass-alt"></i> Cupo: 11 comensales
         </div>
